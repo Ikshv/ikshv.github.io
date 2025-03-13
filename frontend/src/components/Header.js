@@ -18,6 +18,7 @@ function Header({ title, subtitle }) {
                 <Link className='nav-link' to="/nameinput">Name Input</Link>
                 <Link className='nav-link' to="/datafetcher">Data Fetcher</Link>
                 <Link className='nav-link' to="/togglemessage">Toggle Message</Link>
+                <Link className='nav-link' to="/projects">Projects</Link>
             </nav>
         </header>
     );
