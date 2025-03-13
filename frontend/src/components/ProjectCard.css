@@ -1,0 +1,29 @@
+.project-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2)
+}
+
+.project-info {
+    padding: 1rem;
+}
+
+.project-info h3 {
+    margin-top: 0;
+}
+.project-info a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.project-info a:hover {
+    text-decoration: underline;
+}

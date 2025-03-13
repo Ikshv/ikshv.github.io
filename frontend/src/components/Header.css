@@ -1,0 +1,33 @@
+.header {
+    position: sticky;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.header-top h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.navbar {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ff6347
+}
