@@ -4,7 +4,7 @@ function DataFetcher() {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/posts?_limit=5')
+        fetch('https://jsonplaceholder.typicode.com/posts?_limit=500')
             .then((res) => res.json())
             .then((data) => setPosts(data));
     }, []);

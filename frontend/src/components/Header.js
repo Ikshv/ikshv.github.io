@@ -1,38 +1,26 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import DarkModeToggle from './DarkModeToggle';
+import './Header.css'
 
 function Header({ title, subtitle }) {
     return (
-        <header style={headerStyle}>
-            <h1>{title}</h1>
-            {subtitle && <p>{subtitle}</p>}
-            {/* <Router> */}
-                <nav style={navStyle}>
-                    <Link style={linkStyle} to="/">Home</Link>
-                    <Link style={linkStyle} to="/counter">Counter</Link>
-                    <Link style={linkStyle} to="/nameinput">Name Input</Link>
-                    <Link style={linkStyle} to="/datafetcher">Data Fetcher</Link>
-                    <Link style={linkStyle} to="/togglemessage">Toggle Message</Link>
-                </nav>
-            {/* </Router> */}
+        <header className='header'>
+            <div className='header-top'>
+                <h1>{title}</h1>
+                {subtitle && <p>{subtitle}</p>}
+                <DarkModeToggle />
+            </div>
+            <nav className='navbar'>
+                <Link className='nav-link' to="/">Home</Link>
+                <Link className='nav-link' to="/counter">Counter</Link>
+                <Link className='nav-link' to="/nameinput">Name Input</Link>
+                <Link className='nav-link' to="/datafetcher">Data Fetcher</Link>
+                <Link className='nav-link' to="/togglemessage">Toggle Message</Link>
+            </nav>
         </header>
     );
-}
-
-const headerStyle = {
-    backgroundColor: 'black',
-    color: 'white',
-    padding: '1rem',
-    textAlign: 'center'
-};
-
-const navStyle = {
-    padding: '1rem',
-};
-
-const linkStyle = {
-    margin: '0 10px'
 }
 
 export default Header;
