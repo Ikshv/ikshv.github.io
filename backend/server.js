@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api", (req, res) => {
-    res.json({message: "hello from API", timestamp: new Date().toISOString() });
+    res.json({message: "hello from API, nice to meet you", timestamp: new Date().toISOString() });
 });
 
 app.listen(PORT, () => {
