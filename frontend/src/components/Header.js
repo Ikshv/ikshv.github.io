@@ -20,6 +20,7 @@ function Header({ title, subtitle }) {
                 <Link className='nav-link' to="/togglemessage">Toggle Message</Link>
                 <Link className='nav-link' to="/projects">Projects</Link>
                 <Link className='nav-link' to="/webcam">WEBCAM</Link>
+                <Link className='nav-link' to="/webcam2">WEBCAM2</Link>
             </nav>
         </header>
     );

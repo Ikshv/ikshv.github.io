@@ -103,7 +103,7 @@
 // export default WebcamPage;
 
 // src/pages/WebcamLandmarks.js
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Hands } from '@mediapipe/hands';
 import { Camera } from '@mediapipe/camera_utils';
 import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils';
@@ -111,15 +111,18 @@ import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils';
 function WebcamLandmarks() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+  const [cameraActive, setCameraActive] = useState(false);
+  const [camera, setCamera] = useState(null);
+  const [hands, setHands] = useState(null);
 
   useEffect(() => {
     if (videoRef.current && canvasRef.current) {
       // Create a new Hands instance with the helper to load the model files.
-      const hands = new Hands({
+      const handsInstance = new Hands({
         locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
       });
 
-      hands.setOptions({
+      handsInstance.setOptions({
         maxNumHands: 2,
         modelComplexity: 1,
         minDetectionConfidence: 0.7,
@@ -127,19 +130,33 @@ function WebcamLandmarks() {
       });
 
       // Define the callback that receives the results from MediaPipe.
-      hands.onResults(onResults);
+      handsInstance.onResults(onResults);
 
-      // Set up the camera using MediaPipe's Camera utils.
-      const camera = new Camera(videoRef.current, {
-        onFrame: async () => {
-          await hands.send({ image: videoRef.current });
-        },
-        width: 640,
-        height: 480
-      });
-      camera.start();
+      setHands(handsInstance);
     }
   }, []);
+
+    // Set up the camera using MediaPipe's Camera utils.
+    const startCamera = () => {
+        const cameraInstance = new Camera(videoRef.current, {
+            onFrame: async () => {
+                await hands.send({ image: videoRef.current });
+            },
+            width: 640,
+            height: 480
+            });
+            cameraInstance.start();
+            setCamera(cameraInstance)
+            setCameraActive(true)         
+    };
+
+    const stopCamera = () => {
+        if (camera) {
+            camera.stop();
+            setCameraActive(false);
+        }
+    };
+
 
   function onResults(results) {
     const canvasElement = canvasRef.current;
@@ -157,8 +174,8 @@ function WebcamLandmarks() {
     // If hands are detected, draw landmarks and connectors.
     if (results.multiHandLandmarks) {
       for (const landmarks of results.multiHandLandmarks) {
-        drawConnectors(canvasCtx, landmarks, Hands.HAND_CONNECTIONS, { color: '#00FF00', lineWidth: 4 });
-        drawLandmarks(canvasCtx, landmarks, { color: '#FF0000', lineWidth: 2 });
+        drawConnectors(canvasCtx, landmarks, Hands.HAND_CONNECTIONS, { color: 'green', lineWidth: 1 });
+        drawLandmarks(canvasCtx, landmarks, { color: '#FF0000', lineWidth: 1 });
       }
     }
     canvasCtx.restore();
@@ -170,7 +187,11 @@ function WebcamLandmarks() {
       {/* Hidden video element for capturing camera stream */}
       <video ref={videoRef} style={{ display: 'none' }} />
       {/* Canvas element to show the processed video with overlays */}
-      <canvas ref={canvasRef} style={{ width: '640px', height: '480px' }} />
+      <canvas ref={canvasRef} style={{ width: '640px', height: '480px', transform: 'scaleX(-1)'}} />
+
+      <button onClick={() => (cameraActive ? stopCamera() : startCamera())}>
+        {cameraActive ? 'Stop Camera' : 'Start Camera'}
+      </button>
     </div>
   );
 }

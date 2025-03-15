@@ -12,6 +12,7 @@ import Header from './components/Header';
 import Footer from './components/Footer'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import WebcamLandmarks from './pages/WebcamPage';
+import FaceLandmarkerComponent from './components/FaceLandmarkerComponent'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/togglemessage" element={<ToggleMessage />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/webcam" element={<WebcamLandmarks />} />
+        <Route path="/webcam2" element={<FaceLandmarkerComponent />} />
       </Routes>
       <Footer />
     </div>
