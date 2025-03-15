@@ -45,7 +45,7 @@ function WebcamPage() {
             recorder.start(1000)
         })
         .catch((err) => {
-            console.log("error accessing webcam", err);
+            console.log("error accessing webcam", error);
             setError("unable to access webcam")
         });
 
