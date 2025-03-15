@@ -11,6 +11,7 @@ import Projects from './pages/Projects'
 import Header from './components/Header';
 import Footer from './components/Footer'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import WebcamPage from './pages/WebcamPage';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/datafetcher" element={<DataFetcher />} />
         <Route path="/togglemessage" element={<ToggleMessage />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/webcam" element={<WebcamPage />} />
       </Routes>
       <Footer />
     </div>
