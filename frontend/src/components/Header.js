@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import DarkModeToggle from './DarkModeToggle';
 import './Header.css'
+import Dropdown from './Dropdown';
 
 function Header({ title, subtitle }) {
     return (
@@ -11,10 +12,12 @@ function Header({ title, subtitle }) {
                 <h1>{title}</h1>
                 {subtitle && <p>{subtitle}</p>}
                 <DarkModeToggle />
+                <Dropdown />
             </div>
             <nav className='navbar'>
                 <Link className='nav-link' to="/">Home</Link>
                 <Link className='nav-link' to="/counter">Counter</Link>
+                <a href='#skills'>Skills</a>
                 <Link className='nav-link' to="/nameinput">Name Input</Link>
                 <Link className='nav-link' to="/datafetcher">Data Fetcher</Link>
                 <Link className='nav-link' to="/togglemessage">Toggle Message</Link>

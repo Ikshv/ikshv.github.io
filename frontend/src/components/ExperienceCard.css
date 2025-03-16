@@ -1,0 +1,31 @@
+.experience-card {
+    /* background-color: #fff; */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.2 ease-in-out, box-shadow 0.2 ease;
+}
+
+.experience-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.experience-card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.experience-card h4 {
+    margin: 0 0 1rem;
+    font-size: 1.2rem;
+    color: #666
+}
+
+.experience-card p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #444
+}
