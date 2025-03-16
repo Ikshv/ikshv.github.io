@@ -37,7 +37,7 @@ const projectsData = [
 
 function Projects() {
     return (
-        <div className='projects'>
+        <div id='projects' className='projects'>
             <div className='projects-grid'>
                 {projectsData.map((project, index) => (
                     <ProjectCard key={index} {...project} />
