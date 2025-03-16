@@ -1,15 +1,20 @@
 import React from 'react';
 import Hero from '../components/Hero';
 import Api from '../components/ApiReceiver'
+import Skills from './Skills';
+import Experience from './Experience';
+import Sidebar from '../components/Sidebar';
+
 function Home() {
     return (
-        <div>
-            {/* <h1>Personal Website</h1>
-            <p>This is the home page.</p> */}
-            <Api />
+        <main className='home'>
+            {/* <Api /> */}
+            <Sidebar />
             <Hero />
+            <Experience />
+            <Skills />
             {/* add additional sections below */}
-        </div>
+        </main>
     );
 }
 

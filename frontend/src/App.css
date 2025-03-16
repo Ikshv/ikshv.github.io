@@ -1,7 +1,84 @@
-.App {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-html {
+/* Define CSS variables for easy theming */
+:root {
+    --primary-font: 'Arial', Helvetica, sans-serif;
+    --secondary-font: 'Roboto', sans-serif;
+    --gradient-start: #ff7e5f;
+    --gradient-end: #feb47b;
+    --background-gradient: linear-gradient(60deg, var(--gradient-start), var(--gradient-end));
+    --base-font-size: 16px;
+    --text-color: #333;
+    --line-height: 1.6;
+    --transition-duration: 0.3s;
+  }
+  
+  /* Global box-sizing reset and removal of default margins/paddings */
+  html {
     scroll-behavior: smooth;
-}
+    box-sizing: border-box;
+    font-size: 100%; /* 16px by default */
+  }
+  
+  *, *::before, *::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Body styles */
+  body {
+    font-family: var(--primary-font);
+    font-size: var(--base-font-size);
+    background: var(--background-gradient);
+    background-size: cover;
+    min-height: 100vh;
+    line-height: var(--line-height);
+    color: var(--text-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* App container for layout constraints */
+  .App {
+    font-family: var(--primary-font);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
+  /* Typography improvements for headings and paragraphs */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--secondary-font);
+    margin-bottom: 0.5em;
+    line-height: 1.2;
+    color: var(--text-color);
+  }
+  
+  p {
+    margin-bottom: 1em;
+  }
+  
+  /* Link styles with transition effects */
+  a {
+    text-decoration: none;
+    color: inherit;
+    transition: color var(--transition-duration);
+  }
+  
+  a:hover,
+  a:focus {
+    color: #222; /* Slightly darker color on hover */
+  }
+  
+  /* Responsive typography adjustments */
+  @media (max-width: 768px) {
+    html {
+      font-size: 90%; /* Scale down for tablets */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    html {
+      font-size: 85%; /* Scale down for mobile devices */
+    }
+  }
+  

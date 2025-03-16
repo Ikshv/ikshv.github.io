@@ -1,0 +1,28 @@
+.skills {
+    padding: 2rem;
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    max-width: 900px;
+  }
+  
+  .skills h2 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .skills h3 {
+    margin: 1.5rem 0 1rem;
+    font-size: 1.5rem;
+    color: #555;
+  }
+  
+  /* A responsive grid for the skill cards */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
