@@ -18,6 +18,7 @@ import ToggleMessage from './ToggleMessage';
 import WebcamPage from './pages/WebcamPage';
 import './App.css';
 import RoleProtectedRoute from './components/RoleProtectedRoute';
+import UploadProject from './pages/UploadProject';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/datafetcher" element={<DataFetcher />} />
           <Route path="/togglemessage" element={<ToggleMessage />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/new-" element={<UploadProject />} />
           <Route path="/webcam" element={<WebcamPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/create" element={<CreateAccount />} />
