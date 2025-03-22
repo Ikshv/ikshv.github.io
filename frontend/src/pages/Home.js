@@ -10,7 +10,7 @@ function Home() {
         <main className='home'>
             {/* <Api /> */}
             <Sidebar />
-            <Hero />
+            {/* <Hero /> */}
             <Experience />
             <Skills />
             {/* add additional sections below */}
