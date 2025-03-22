@@ -2,9 +2,9 @@
 :root {
     --primary-font: 'Arial', Helvetica, sans-serif;
     --secondary-font: 'Roboto', sans-serif;
-    --gradient-start: #ff7e5f;
-    --gradient-end: #feb47b;
-    --background-gradient: linear-gradient(60deg, var(--gradient-start), var(--gradient-end));
+    --gradient-start: #5f82ff;
+    --gradient-end: #16a247;
+    --background-gradient: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
     --base-font-size: 16px;
     --text-color: #333;
     --line-height: 1.6;
