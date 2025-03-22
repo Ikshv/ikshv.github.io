@@ -1,6 +1,7 @@
 import React from 'react';
 import ProjectCard from '../components/ProjectCard';
 import './Projects.css'
+import { Link } from 'react-router-dom';
 
 const projectsData = [
     {
@@ -38,6 +39,8 @@ const projectsData = [
 function Projects() {
     return (
         <div id='projects' className='projects'>
+            <Link className="nav-link" to="/projects/new-">Add a project</Link>
+
             <div className='projects-grid'>
                 {projectsData.map((project, index) => (
                     <ProjectCard key={index} {...project} />
