@@ -9,7 +9,7 @@ function Home() {
     return (
         <main className='home'>
             {/* <Api /> */}
-            <Sidebar />
+            {/* <Sidebar /> */}
             {/* <Hero /> */}
             <Experience />
             <Skills />
