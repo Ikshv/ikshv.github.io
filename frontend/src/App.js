@@ -22,9 +22,7 @@ import UploadProject from './pages/UploadProject';
 
 function App() {
   return (
-    <AuthProvider>
       <div className="App">
-        <Header title="Personal Website" subtitle="Welcome to my site!" />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/hello" element={<Hello name="world" />} />
@@ -66,7 +64,6 @@ function App() {
         </Routes>
         <Footer />
       </div>
-    </AuthProvider>
   );
 }
 
