@@ -1,7 +1,25 @@
-.header {
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #333;
+    --background-color: #f4f4f4;
+    --text-color: #333;
+    --border-color: #ccc;
+    --spacing: 0.5rem;
+    --transition: 0.3s ease;
+
+    /* Fonts */
+    --primary-font: 'Arial', Helvetica, sans-serif;
+    --secondary-font: 'Roboto', sans-serif;
+
+}
+
+.site-header {
     position: sticky;
+    width: 100%;
+    margin: 0;
     top: 0;
-    background-color: #000;
+    background-color: var(--primary-color);
+    padding: var(--spacing);
 }
 
 .header-top {
@@ -23,7 +41,7 @@
     gap: 20px;
     position: sticky;
     top: 0;
-    background-color: black;
+    background-color: var(--secondary-color);
     width: 100%;
     z-index: 1000;
 
@@ -53,3 +71,47 @@ font: inherit;
 text-decoration: underline;
 }
 
+/* Basic styling for the dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Styling for the dropdown toggle */
+  .dropdown-toggle {
+    cursor: pointer;
+  }
+  
+  /* Initially hide the dropdown menu */
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #f4f4f4;
+    min-width: 150px;
+    padding: 0.5rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    list-style: none;
+    margin: 0;
+  }
+  
+  /* Show the dropdown menu when hovering over the dropdown container */
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  
+  /* Styling for each dropdown item */
+  .dropdown-item {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  /* Hover effect for dropdown items */
+  .dropdown-item:hover {
+    background-color: #ddd;
+  }
+  
