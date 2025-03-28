@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './SiteSidebar.css';
 
-function SiteSidebar() {
-  const [isOpen, setIsOpen] = useState(true);
-  const toggleSidebar = () => setIsOpen(prev => !prev);
+function SiteSidebar({ isOpen, toggleSidebar }) {
+
 
   return (
     <div className={`site-sidebar ${isOpen ? 'open' : 'closed'}`}>

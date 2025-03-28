@@ -20,7 +20,6 @@ import './App.css';
 import RoleProtectedRoute from './components/RoleProtectedRoute';
 import UploadProject from './pages/UploadProject';
 
-
 function App() {
   return (
       <div className="App">
