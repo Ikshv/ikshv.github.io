@@ -11,7 +11,7 @@ function AppLayout({ children }) {
   return (
     <div className="app-layout">
         <VantaBackground />
-      <Header title="My Site" toggleSidebar={toggleSidebar} />
+      <Header title="Isaac's Portfolio" toggleSidebar={toggleSidebar} />
       <div className="layout-body">
         <SiteSidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
         <main className="main-content">{children}</main>
