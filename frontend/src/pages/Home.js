@@ -4,12 +4,14 @@ import Api from '../components/ApiReceiver'
 import Skills from './Skills';
 import Experience from './Experience';
 import Sidebar from '../components/Sidebar';
+import SiteSidebar from '../components/SiteSidebar';
 
 function Home() {
     return (
         <main className='home'>
             {/* <Api /> */}
             {/* <Sidebar /> */}
+            {/* <SiteSidebar /> */}
             {/* <Hero /> */}
             <Experience />
             <Skills />

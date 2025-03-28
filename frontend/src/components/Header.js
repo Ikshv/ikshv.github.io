@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import './Header.css';
@@ -9,6 +9,7 @@ function Header({ title, subtitle }) {
   return (
     <header className="site-header">
       <div className="header-top">
+        <button>sidebar</button>
         <h1 className='header-title'>{title}</h1>
         {subtitle && <p>{subtitle}</p>}
         {user ? (
@@ -29,7 +30,6 @@ function Header({ title, subtitle }) {
         <Link className="nav-link" to="/">Home</Link>
         <Link className="nav-link" to="/counter">Counter</Link>
         <a className="nav-link" href="#skills">Skills</a>
-        <Link className="nav-link" to="/datafetcher">Data Fetcher</Link>
         <Link className="nav-link" to="/projects">Projects</Link>
 
         {/* Dropdown Menu triggered by hover */}
@@ -44,6 +44,9 @@ function Header({ title, subtitle }) {
             </li>
             <li>
                 <Link className="dropdown-item" to="/webcam">WEBCAM</Link>
+            </li>
+            <li>
+                <Link className="dropdown-item" to="/datafetcher">Data Fetcher</Link>
             </li>
           </ul>
         </div>
