@@ -19,10 +19,11 @@ import WebcamPage from './pages/WebcamPage';
 import './App.css';
 import RoleProtectedRoute from './components/RoleProtectedRoute';
 import UploadProject from './pages/UploadProject';
+import AppLayout from './pages/AppLayout';
 
 function App() {
   return (
-      <div className="App">
+      <AppLayout>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/hello" element={<Hello name="world" />} />
@@ -63,7 +64,7 @@ function App() {
 
         </Routes>
         <Footer />
-      </div>
+      </AppLayout>
   );
 }
 

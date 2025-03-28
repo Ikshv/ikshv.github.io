@@ -1,5 +1,5 @@
 :root {
-    --primary-color: #007bff;
+    --primary-color: rgba(79, 102, 107, 0.708); /* Tomato with transparency */
     --secondary-color: #333;
     --background-color: #f4f4f4;
     --text-color: #333;
@@ -19,6 +19,8 @@
     margin: 0;
     top: 0;
     background-color: var(--primary-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: var(--spacing);
     z-index: 1000;
 }
