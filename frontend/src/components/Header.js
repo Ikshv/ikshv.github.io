@@ -41,7 +41,7 @@ function Header({ title, subtitle, toggleSidebar }) {
       <nav className="navbar">
         <Link className="nav-link" to="/">Home</Link>
         <Link className="nav-link" to="/counter">Counter</Link>
-        <a className="nav-link" href="#skills">Skills</a>
+        <Link className="nav-link" to="/skills">Skills</Link>
         <Link className="nav-link" to="/projects">Projects</Link>
 
         <div className="dropdown">

@@ -55,7 +55,7 @@
   }
   
   .projects-wrapper.open {
-    max-height: 2000px;
+    max-height: 5000px;
     opacity: 1;
     padding-top: 1rem;
     padding-bottom: 1rem; /* ✅ adds bottom padding when open */

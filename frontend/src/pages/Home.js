@@ -5,6 +5,7 @@ import Skills from './Skills';
 import Experience from './Experience';
 import Sidebar from '../components/Sidebar';
 import SiteSidebar from '../components/SiteSidebar';
+import Education from './Education';
 
 function Home() {
     return (
@@ -13,6 +14,7 @@ function Home() {
             {/* <Sidebar /> */}
             {/* <SiteSidebar /> */}
             {/* <Hero /> */}
+            <Education />
             <Experience />
             <Skills />
             {/* add additional sections below */}

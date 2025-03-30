@@ -20,6 +20,7 @@ import './App.css';
 import RoleProtectedRoute from './components/RoleProtectedRoute';
 import UploadProject from './pages/UploadProject';
 import AppLayout from './pages/AppLayout';
+import Skills from './pages/Skills';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/webcam" element={<WebcamPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/create" element={<CreateAccount />} />
+          <Route path="/skills" element={<Skills />} />
           <Route
             path="/dashboard"
             element={
