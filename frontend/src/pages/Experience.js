@@ -1,5 +1,6 @@
 import React from 'react';
 import ExperienceCard from '../components/ExperienceCard';
+import './Experience.css'; // Assuming you have a CSS file for styling
 
 const experiences = [
     {
@@ -73,14 +74,16 @@ const experiences = [
 
 function Experiences() {
     return (
-        <section id='experience' className='experience'>
-            <h1>Experience</h1>
-            {experiences.map((experience) => (
-                <ExperienceCard key={experience.id} {...experience} />
-            ))}
-            
-        </section>
+      <section id="experience" className="experience">
+        <h1 className="experience-title">Experience</h1>
+        <div className="experience-list">
+          {experiences.map((experience) => (
+            <ExperienceCard key={experience.id} {...experience} />
+          ))}
+        </div>
+      </section>
     );
-}
+  }
+  
 
 export default Experiences;

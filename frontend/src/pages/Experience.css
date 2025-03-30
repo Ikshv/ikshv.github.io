@@ -1,0 +1,19 @@
+.experience {
+    padding: 4rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .experience-title {
+    font-size: 2.5rem;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 2.5rem;
+  }
+  
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
