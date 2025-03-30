@@ -43,6 +43,7 @@ function Header({ title, subtitle, toggleSidebar }) {
         <Link className="nav-link" to="/counter">Counter</Link>
         <Link className="nav-link" to="/skills">Skills</Link>
         <Link className="nav-link" to="/projects">Projects</Link>
+        <Link className="nav-link" to="/education">Education</Link>
 
         <div className="dropdown">
           <span className="nav-link dropdown-toggle">More</span>

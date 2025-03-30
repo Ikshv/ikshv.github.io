@@ -1,6 +1,6 @@
 // App.jsx
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/Home';
@@ -21,10 +21,16 @@ import RoleProtectedRoute from './components/RoleProtectedRoute';
 import UploadProject from './pages/UploadProject';
 import AppLayout from './pages/AppLayout';
 import Skills from './pages/Skills';
+import Education from './pages/Education';
+
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
+  const location = useLocation(); // Get the current location from React Router
+
   return (
       <AppLayout>
+        <AnimatePresence mode="wait">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/hello" element={<Hello name="world" />} />
@@ -38,6 +44,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/create" element={<CreateAccount />} />
           <Route path="/skills" element={<Skills />} />
+          <Route path="/education" element={<Education />} />
           <Route
             path="/dashboard"
             element={
@@ -65,7 +72,7 @@ function App() {
           />
 
         </Routes>
-        <Footer />
+        </AnimatePresence>
       </AppLayout>
   );
 }

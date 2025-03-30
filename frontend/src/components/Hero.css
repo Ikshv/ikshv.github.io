@@ -55,3 +55,15 @@
     background: #feb47b;
   }
   
+  .scroll-down-indicator {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    color: #fff;
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+  

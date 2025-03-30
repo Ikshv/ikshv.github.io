@@ -1,0 +1,29 @@
+.homepage-sidebar {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    padding: 1rem;
+    background-color: #333;
+    color: #fff;
+    z-index: 500;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  .homepage-sidebar a {
+    display: block;
+    color: #ccc;
+    margin: 0.5rem 0;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .homepage-sidebar a:hover {
+    color: #fff;
+  }
+  
+  .homepage-sidebar a.active {
+    font-weight: bold;
+    color: #6ec1e4;
+    text-decoration: underline;
+  }
+  

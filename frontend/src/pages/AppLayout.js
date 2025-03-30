@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import SiteSidebar from '../components/SiteSidebar';
 import './AppLayout.css';
 import VantaBackground from '../components/Background3D';
+import Footer from '../components/Footer';
 
 function AppLayout({ children }) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -16,6 +17,7 @@ function AppLayout({ children }) {
         <SiteSidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
         <main className="main-content">{children}</main>
       </div>
+      <Footer />
     </div>
   );
 }
