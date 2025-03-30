@@ -1,35 +1,85 @@
 .experience-card {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease;
-}
-
-.experience-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-}
-
-
-.experience-card h3 {
-    margin: 0 0 0.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    color: #fff;
+  }
+  
+  .experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  
+  .title-company h3 {
+    margin: 0;
     font-size: 1.5rem;
-    color: #333;
-}
-
-.experience-card h4 {
-    margin: 0 0 1rem;
-    font-size: 1.2rem;
-    color: #666
-}
-
-.experience-card p {
+  }
+  
+  .title-company h4 {
+    margin: 0.3rem 0;
+    font-weight: normal;
+    font-size: 1.1rem;
+    color: #ccc;
+  }
+  
+  .meta {
+    text-align: right;
+    font-size: 0.9rem;
+    color: #ccc;
+  }
+  
+  .role-summary {
     font-size: 1rem;
-    line-height: 1.5;
-    color: #444
-}
+    margin: 1rem 0;
+  }
+  
+  .project-card {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.07);
+    border-left: 4px solid #6ec1e4;
+    border-radius: 8px;
+  }
+  
+  .project-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .project-summary {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .tech-stack {
+    margin-bottom: 0.5rem;
+  }
+  
+  .tech-badge {
+    display: inline-block;
+    background: #6ec1e4;
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 12px;
+    margin: 0 0.4rem 0.4rem 0;
+    font-weight: 500;
+  }
+  
+  .highlights {
+    padding-left: 1.2rem;
+    font-size: 0.9rem;
+    color: #f0f0f0;
+  }
+  
+  .highlights li {
+    margin-bottom: 0.4rem;
+  }
+  
