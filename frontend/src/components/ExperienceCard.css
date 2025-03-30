@@ -7,6 +7,8 @@
     padding: 2rem;
     margin-bottom: 2rem;
     color: #fff;
+    overflow: visible; /* ✅ ensures projects can expand */
+    position: relative;
   }
   
   .experience-header {
@@ -40,8 +42,34 @@
     margin: 1rem 0;
   }
   
+  /* --- Project Section --- */
+  
+  .projects-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding: 0 1rem; /* ✅ adds padding for the transition */
+    width: 100%;                    /* ✅ ensures it stretches fully */
+    box-sizing: border-box;         /* ✅ includes padding inside width */
+    transition: max-height 0.5s ease, opacity 0.4s ease, padding 1s ease;
+  }
+  
+  .projects-wrapper.open {
+    max-height: 2000px;
+    opacity: 1;
+    padding-top: 1rem;
+    padding-bottom: 1rem; /* ✅ adds bottom padding when open */
+  }
+  
+  
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow: visible; /* ✅ prevents cutoff */
+  }
+  
   .project-card {
-    margin-top: 1.5rem;
     padding: 1rem;
     background: rgba(255, 255, 255, 0.07);
     border-left: 4px solid #6ec1e4;
@@ -60,6 +88,7 @@
   
   .tech-stack {
     margin-bottom: 0.5rem;
+    flex-wrap: wrap;
   }
   
   .tech-badge {

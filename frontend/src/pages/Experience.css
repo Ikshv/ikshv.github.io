@@ -2,6 +2,8 @@
     padding: 4rem 2rem;
     max-width: 1000px;
     margin: 0 auto;
+    overflow: visible; /* ✅ make sure nothing gets clipped */
+    position: relative;
   }
   
   .experience-title {
@@ -16,4 +18,22 @@
     flex-direction: column;
     gap: 2rem;
   }
+  
+  .toggle-projects-btn {
+    margin-top: 1rem;
+    padding: 0.4rem 0.8rem;
+    background-color: #6ec1e4;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .toggle-projects-btn:hover {
+    background-color: #5ab3d5;
+  }
+  
   

@@ -12,7 +12,7 @@ const experiences = [
         description: "I developed user-friendly web applications using React.",
         projects: [
             {
-                name: "JOY Calibration System",
+                name: "Calibration Systems",
                 summary: "Developed a web application for calibrating JOY equipment.",
                 technologies: ["React", "JavaScript", "CSS"],
                 highlights: [

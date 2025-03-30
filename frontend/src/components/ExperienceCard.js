@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import './ExperienceCard.css';
 
 function ExperienceCard({
@@ -7,8 +8,11 @@ function ExperienceCard({
   startDate,
   endDate,
   description,
-  projects,
+  projects
 }) {
+  const [showProjects, setShowProjects] = useState(false);
+  const toggleProjects = () => setShowProjects(prev => !prev);
+
   return (
     <article className="experience-card">
       <div className="experience-header">
@@ -17,31 +21,43 @@ function ExperienceCard({
           <h4>{companyName}</h4>
         </div>
         <div className="meta">
-          <span>{location}</span>
+          {location && <span>{location}</span>}
           <span>{startDate} – {endDate}</span>
         </div>
       </div>
 
       <p className="role-summary">{description}</p>
 
-      {projects?.map((project, index) => (
-        <div className="project-card" key={index}>
-          <h5 className="project-title">{project.name}</h5>
-          <p className="project-summary">{project.summary}</p>
+      {projects?.length > 0 && (
+        <>
+          <button className="toggle-projects-btn" onClick={toggleProjects}>
+            {showProjects ? 'Hide Projects' : 'Show Projects'}
+          </button>
 
-          <div className="tech-stack">
-            {project.technologies.map((tech, idx) => (
-              <span key={idx} className="tech-badge">{tech}</span>
-            ))}
+          <div className={`projects-wrapper ${showProjects ? 'open' : ''}`}>
+            <div className="projects-list">
+              {projects.map((project, index) => (
+                <div key={index} className="project-card">
+                  <h5 className="project-title">{project.name}</h5>
+                  <p className="project-summary">{project.summary}</p>
+
+                  <div className="tech-stack">
+                    {project.technologies.map((tech, idx) => (
+                      <span key={idx} className="tech-badge">{tech}</span>
+                    ))}
+                  </div>
+
+                  <ul className="highlights">
+                    {project.highlights.map((point, idx) => (
+                      <li key={idx}>{point}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
-
-          <ul className="highlights">
-            {project.highlights.map((point, idx) => (
-              <li key={idx}>{point}</li>
-            ))}
-          </ul>
-        </div>
-      ))}
+        </>
+      )}
     </article>
   );
 }
