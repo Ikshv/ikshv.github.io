@@ -17,6 +17,8 @@ function WebcamPage() {
         });
     }, []);
 
+    error && console.log(error);
+
     return (
         <div style={{ textAlign: 'center', padding: '2rem' }}>
             <video 

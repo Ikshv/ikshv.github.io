@@ -25,8 +25,6 @@ import Contact from './pages/Contact';
 import About from './pages/About';
 
 function App() {
-  const location = useLocation(); // Get the current location from React Router
-
   return (
       <AppLayout>
         <AnimatePresence mode="wait">
