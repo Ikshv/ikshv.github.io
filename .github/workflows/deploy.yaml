@@ -3,12 +3,15 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [dev]  # OR repository_dispatch, schedule, etc.
-    paths:
-      - 'frontend/**'  # Only trigger on changes in the frontend directory
-      - 'frontend/src/data/projectIndex.json'  # Only trigger on changes in the project index
+  
+  workflow_run:
+    workflows: ["Generate Project Index"]
+    types:
+      - completed
 
 jobs:
   build-and-deploy:
+    if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
 
     steps:
