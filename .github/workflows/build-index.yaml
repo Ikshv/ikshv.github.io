@@ -4,6 +4,10 @@ on:
   push:
     branches: [dev]       # ✅ Only triggers on push to dev
   workflow_dispatch:      # ✅ Optional: lets you trigger manually
+  schedule:              # ✅ Optional: lets you set a cron job
+    - cron: '0 0 * * *'   # ✅ Every day at midnight UTC
+  repository_dispatch: # ✅ Optional: lets you trigger from another workflow
+    types: [project-json-update] # ✅ Only triggers on this event type
 
 jobs:
   build:
