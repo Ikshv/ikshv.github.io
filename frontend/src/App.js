@@ -24,6 +24,7 @@ import Skills from './pages/Skills';
 import Education from './pages/Education';
 
 import { AnimatePresence } from 'framer-motion';
+import Contact from './pages/Contact';
 
 function App() {
   const location = useLocation(); // Get the current location from React Router
@@ -45,6 +46,7 @@ function App() {
           <Route path="/create" element={<CreateAccount />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/education" element={<Education />} />
+          <Route path="/contact" element={<Contact />} />
           <Route
             path="/dashboard"
             element={
