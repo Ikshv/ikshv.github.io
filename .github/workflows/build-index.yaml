@@ -23,6 +23,8 @@ jobs:
 
       - name: Generate project index
         run: python frontend/scripts/generate_index.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_API_TOKEN }}
 
       - name: Commit and push changes
         run: |
@@ -32,5 +34,5 @@ jobs:
           git commit -m "🔄 Auto-update project index" || echo "No changes to commit"
           git push
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # ✅ Required for push
+          GITHUB_TOKEN: ${{ secrets.GH_API_TOKEN }}   # ✅ Required for push
           
