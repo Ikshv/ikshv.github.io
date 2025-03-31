@@ -6,7 +6,7 @@
   },
   {
     "name": "new project to test cross-repo compile",
-    "description": "this is a new project to test that the github action cross-repo compile works",
+    "description": "this is a new project to test that the github action cross-repo compile works, modified to test the new action",
     "live": "True"
   }
 ]
