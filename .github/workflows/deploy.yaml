@@ -3,8 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [dev]  # OR repository_dispatch, schedule, etc.
-    # paths:
-    #   - 'frontend/**'  # Only trigger on changes in the frontend directory
+    paths:
+      - 'frontend/**'  # Only trigger on changes in the frontend directory
+      - 'frontend/src/data/projectIndex.json'  # Only trigger on changes in the project index
 
 jobs:
   build-and-deploy:
