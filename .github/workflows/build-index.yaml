@@ -28,7 +28,7 @@ jobs:
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add src/data/projectIndex.json
+          git add frontend/src/data/projectIndex.json
           git commit -m "🔄 Auto-update project index" || echo "No changes to commit"
           git push
         env:
