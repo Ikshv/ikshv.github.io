@@ -1,9 +1,11 @@
 import React from 'react';
 import './About.css';
+import Repos from './Repos';
 
 function About() {
   return (
     <section id="about" className="about-section">
+        <Repos />
       <h2>About Me</h2>
       <p>
         Hey! I’m Isaac, a full stack developer with a strong background in engineering and data analysis.

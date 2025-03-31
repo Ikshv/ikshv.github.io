@@ -1,0 +1,17 @@
+name: Trigger Portfolio Update
+
+on:
+  push:
+    paths:
+      - 'project.json'
+
+jobs:
+  notify-portfolio:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send dispatch to portfolio site
+        run: |
+          curl -X POST https://api.github.com/repos/ikshv/ikshv.github.io/dispatches \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token ${{ secrets.GH_API_TOKEN }}" \
+          -d '{"event_type": "project-json-update"}'

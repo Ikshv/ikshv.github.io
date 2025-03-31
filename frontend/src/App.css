@@ -6,7 +6,7 @@
     --gradient-end: #16a247;
     --background-gradient: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
     --base-font-size: 16px;
-    --text-color: #333;
+    --text-color: #ffffff;
     --line-height: 1.6;
     --transition-duration: 0.3s;
   }
