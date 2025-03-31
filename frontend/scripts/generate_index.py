@@ -11,22 +11,17 @@ def getRepos():
     repos = response.json()
 
     for repo in repos:
-        print(
-            {
-                "title": repo["name"],
-                "url": repo["html_url"],
-                # "description": repo["description"],
-                # "created_at": repo["created_at"],
-                # "updated_at": repo["updated_at"]
-            }
-        )
+        try:
+            getRepoDetails(repo["name"])
+        except KeyError:
+            # print(f"KeyError: {repo}")
+            print("KeyError")
+            
 
-    return repos
-
-def getRepoDetails():
+def getRepoDetails(repo):
     branch = "dev"
     owner = "ikshv"
-    repo = "ikshv.github.io"
+    # repo = "ikshv.github.io"
     file_path = "project.json"
     url = f"https://api.github.com/repos/{owner}/{repo}/contents/{file_path}?ref={branch}"
     response = requests.get(url)
@@ -35,4 +30,6 @@ def getRepoDetails():
     data = json.loads(decoded)
     print(data)
 
-getRepoDetails()
+# getRepoDetails()
+
+getRepos()
