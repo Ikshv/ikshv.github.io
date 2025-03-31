@@ -3,5 +3,10 @@
     "name": "ikshv.github.io",
     "description": "website description again",
     "live": "True"
+  },
+  {
+    "name": "new project to test cross-repo compile",
+    "description": "this is a new project to test that the github action cross-repo compile works",
+    "live": "True"
   }
 ]
