@@ -1,8 +1,9 @@
 name: Generate Project Index
 
 on:
-  push:
-    branches: [dev]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Runs every day at midnight UTC
 
 jobs:
   build:
