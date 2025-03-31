@@ -1,17 +1,5 @@
 {
-    "name": "my_project",
-    "version": "1.0.0",
-    "description": "A sample project",
-    "main": "index.js",
-    "scripts": {
-        "start": "node index.js"
-    },
-    "dependencies": {
-        "express": "^4.17.1"
-    },
-    "devDependencies": {
-        "jest": "^26.6.3"
-    },
-    "author": "Your Name",
-    "license": "ISC"
+    "name": "ikshv.github.io",
+    "description": "website",
+    "version": "1.0.0"
 }

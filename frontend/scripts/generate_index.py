@@ -4,8 +4,8 @@ import base64
 
 
 def getRepos():
-    username = "ikshv"
-    url = f"https://api.github.com/users/{username}/repos"
+    owner = "ikshv"
+    url = f"https://api.github.com/users/{owner}/repos"
     response = requests.get(url)
 
     repos = response.json()
@@ -23,9 +23,16 @@ def getRepos():
 
     return repos
 
-url = "https://api.github.com/repos/ikshv/ikshv.github.io/contents/projects.json"
-response = requests.get(url)
-content = response.json()["content"]
-decoded = base64.b64decode(content).decode("utf-8")
-data = json.loads(decoded)
-print(data)
+def getRepoDetails():
+    branch = "dev"
+    owner = "ikshv"
+    repo = "ikshv.github.io"
+    file_path = "project.json"
+    url = f"https://api.github.com/repos/{owner}/{repo}/contents/{file_path}?ref={branch}"
+    response = requests.get(url)
+    content = response.json()["content"]
+    decoded = base64.b64decode(content).decode("utf-8")
+    data = json.loads(decoded)
+    print(data)
+
+getRepoDetails()
