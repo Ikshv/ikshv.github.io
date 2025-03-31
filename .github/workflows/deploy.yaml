@@ -1,9 +1,6 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [dev]  # OR repository_dispatch, schedule, etc.
-  
   workflow_run:
     workflows: ["Generate Project Index"]
     types:
@@ -11,7 +8,7 @@ on:
 
 jobs:
   build-and-deploy:
-    if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
 
     steps:
