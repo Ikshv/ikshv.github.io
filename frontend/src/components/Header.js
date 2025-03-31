@@ -40,11 +40,18 @@ function Header({ title, subtitle, toggleSidebar }) {
 
       <nav className="navbar">
         <Link className="nav-link" to="/">Home</Link>
-        <Link className="nav-link" to="/counter">Counter</Link>
         <Link className="nav-link" to="/skills">Skills</Link>
         <Link className="nav-link" to="/projects">Projects</Link>
-        <Link className="nav-link" to="/education">Education</Link>
-        <Link className="nav-link" to="/contact">Contact</Link>
+        
+        <div className="dropdown">
+          <span className='nav-link dropdown-toggle'>About Me</span>
+            <ul className="dropdown-menu">
+              <li><Link className="dropdown-item" to="/about">About</Link></li>
+              <li><Link className="dropdown-item" to="/contact">Contact</Link></li>
+              <li><Link className="dropdown-item" to="/education">Education</Link></li>
+            </ul>
+        </div>
+        
 
         <div className="dropdown">
           <span className="nav-link dropdown-toggle">More</span>
@@ -53,6 +60,7 @@ function Header({ title, subtitle, toggleSidebar }) {
             <li><Link className="dropdown-item" to="/nameinput">Name Input</Link></li>
             <li><Link className="dropdown-item" to="/webcam">WEBCAM</Link></li>
             <li><Link className="dropdown-item" to="/datafetcher">Data Fetcher</Link></li>
+            <li><Link className="dropdown-item" to="/counter">Counter</Link></li>
           </ul>
         </div>
       </nav>
