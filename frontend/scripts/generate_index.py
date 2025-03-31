@@ -31,7 +31,7 @@ def get_repos():
         except Exception as e:
             print(f"⚠️ Skipped {name}: {e}")
 
-    with open("src/data/projectIndex.json", "w") as f:
+    with open("frontend/src/data/projectIndex.json", "w") as f:
         json.dump(index, f, indent=2)
         print(f"\n📦 {len(index)} live projects written to projectIndex.json")
 
