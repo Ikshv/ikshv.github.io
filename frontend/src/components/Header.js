@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import './Header.css';
-import SiteSidebar from './SiteSidebar';
 import logo from '../assets/logo512.png'; // Adjust the path as necessary
 
 function Header({ title, subtitle, toggleSidebar }) {

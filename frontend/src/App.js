@@ -1,15 +1,12 @@
 // App.jsx
 import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
-import Header from './components/Header';
-import Footer from './components/Footer';
 import Hello from './Hello';
 import Counter from './Counter';
 import NameInput from './NameInput';
@@ -57,7 +54,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-          // Inside App.jsx Routes
           <Route
             path="/dev-tools"
             element={
