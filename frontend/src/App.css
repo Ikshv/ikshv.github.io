@@ -50,7 +50,7 @@
     font-family: var(--secondary-font);
     margin-bottom: 0.5em;
     line-height: 1.2;
-    color: var(--text-color);
+    /* color: var(--text-color); */
   }
   
   p {
