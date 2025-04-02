@@ -40,6 +40,11 @@ function Sidebar() {
             key={item.id}
             smooth
             to={`#${item.id}`}
+            scroll={el => {
+              const yOffset = -100; // Adjust based on your header height
+              const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+              window.scrollTo({ top: y, behavior: 'smooth' });
+            }}
             className={`transition-colors px-3 py-1 rounded hover:bg-blue-500 hover:text-white ${
               activeSection === item.id
                 ? 'bg-blue-600 text-white font-bold'
@@ -48,6 +53,7 @@ function Sidebar() {
           >
             {item.label}
           </HashLink>
+
         ))}
       </nav>
     </div>
