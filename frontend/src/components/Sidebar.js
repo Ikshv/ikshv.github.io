@@ -3,6 +3,7 @@ import { HashLink } from 'react-router-hash-link';
 
 function Sidebar() {
   const [activeSection, setActiveSection] = useState('');
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,7 +22,7 @@ function Sidebar() {
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // on mount
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -33,29 +34,42 @@ function Sidebar() {
   ];
 
   return (
-    <div className="fixed top-1/4 left-4 z-[998] bg-white/10 backdrop-blur-md p-4 rounded-xl shadow-lg space-y-4 text-sm text-white">
-      <nav className="flex flex-col gap-3">
-        {navItems.map((item) => (
-          <HashLink
-            key={item.id}
-            smooth
-            to={`#${item.id}`}
-            scroll={el => {
-              const yOffset = -100; // Adjust based on your header height
-              const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-              window.scrollTo({ top: y, behavior: 'smooth' });
-            }}
-            className={`transition-colors px-3 py-1 rounded hover:bg-blue-500 hover:text-white ${
-              activeSection === item.id
-                ? 'bg-blue-600 text-white font-bold'
-                : 'text-gray-200'
-            }`}
-          >
-            {item.label}
-          </HashLink>
+    <div
+      className={`fixed top-1/4 z-50 transition-transform duration-300 ${
+        isOpen ? 'translate-x-0' : '-translate-x-[85%]'
+      }`}
+    >
+      {/* Sidebar Content */}
+      <div className="relative bg-white/10 backdrop-blur-md p-4 pr-6 rounded-r-xl shadow-lg text-sm text-white w-30">
+        <nav className="flex flex-col gap-3">
+          {navItems.map((item) => (
+            <HashLink
+              key={item.id}
+              smooth
+              to={`#${item.id}`}
+              scroll={(el) => {
+                const yOffset = -100;
+                const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+              }}
+              className={`transition-colors px-3 py-1 rounded hover:bg-blue-500 hover:text-white ${
+                activeSection === item.id
+                  ? 'bg-blue-600 text-white font-bold'
+                  : 'text-gray-200'
+              }`}
+            >
+              {item.label}
+            </HashLink>
+          ))}
+        </nav>
 
-        ))}
-      </nav>
+        {/* Toggle Tab */}
+        <div
+          onClick={() => setIsOpen(!isOpen)}
+          className="absolute top-1/2 -right-3 translate-y-[-50%] w-3 h-16 bg-blue-600 hover:bg-blue-500 rounded-r cursor-pointer"
+          title={isOpen ? 'Close Sidebar' : 'Open Sidebar'}
+        ></div>
+      </div>
     </div>
   );
 }
