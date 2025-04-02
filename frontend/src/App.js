@@ -28,6 +28,7 @@ function App() {
   return (
       <AppLayout>
         <AnimatePresence mode="wait">
+                  <h1 className='text-3x1 font-bold underline text-blue-500'>hello</h1>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/hello" element={<Hello name="world" />} />
