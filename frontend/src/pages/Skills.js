@@ -87,40 +87,62 @@ const toolsSkills = [
 
 function Skills() {
     return (
-        <div id='skills' className='skills'>
-            <h2>Skills</h2>
-            <h3>Languages</h3>
-            <div className='skills-grid'>
-                {languagesSkills.map((skill, index) => (
-                    <SkillsCard key={index} {...skill} />
-                ))}
+      <section
+        id="skills"
+        className="max-w-5xl mx-auto px-6 py-12 text-white text-center"
+      >
+        <h2 className="text-4xl font-bold mb-10">Skills</h2>
+  
+        {/* Each category block */}
+        <div className="space-y-12">
+          <div>
+            <h3 className="text-2xl font-semibold mb-6">Languages</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+              {languagesSkills.map((skill, index) => (
+                <SkillsCard key={index} {...skill} />
+              ))}
             </div>
-            <h3>Frontend</h3>
-            <div className='skills-grid'>
-                {frontendSkills.map((skill, index) => (
-                    <SkillsCard key={index} {...skill} />
-                ))}
+          </div>
+  
+          <div>
+            <h3 className="text-2xl font-semibold mb-6">Frontend</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+              {frontendSkills.map((skill, index) => (
+                <SkillsCard key={index} {...skill} />
+              ))}
             </div>
-            <h3>Backend</h3>
-            <div className='skills-grid'>
-                {backendSkills.map((skill, index) => (
-                    <SkillsCard key={index} {...skill} />
-                ))}
+          </div>
+  
+          <div>
+            <h3 className="text-2xl font-semibold mb-6">Backend</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+              {backendSkills.map((skill, index) => (
+                <SkillsCard key={index} {...skill} />
+              ))}
             </div>
-            <h3>Databases</h3>
-            <div className='skills-grid'>
-                {databasesSkills.map((skill, index) => (
-                    <SkillsCard key={index} {...skill} />
-                ))}
+          </div>
+  
+          <div>
+            <h3 className="text-2xl font-semibold mb-6">Databases</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+              {databasesSkills.map((skill, index) => (
+                <SkillsCard key={index} {...skill} />
+              ))}
             </div>
-            <h3>Libraries & Tools</h3>
-            <div className='skills-grid'>
-                {toolsSkills.map((skill, index) => (
-                    <SkillsCard key={index} {...skill} />
-                ))}
+          </div>
+  
+          <div>
+            <h3 className="text-2xl font-semibold mb-6">Libraries & Tools</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+              {toolsSkills.map((skill, index) => (
+                <SkillsCard key={index} {...skill} />
+              ))}
             </div>
+          </div>
         </div>
+      </section>
     );
-}
+  }
+  
 
 export default Skills;

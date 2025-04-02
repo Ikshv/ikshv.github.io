@@ -4,6 +4,7 @@ import Skills from './Skills';
 import Experience from './Experience';
 import Sidebar from '../components/Sidebar';
 import Education from './Education';
+import About from './About';
 
 function Home() {
     return (
@@ -12,6 +13,7 @@ function Home() {
             <section id="top">
                 <Hero />
             </section>
+            <About />
             <section id="education">
                 <Education />
             </section>

@@ -1,71 +1,84 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import './Header.css';
-import logo from '../assets/logo512.png'; // Adjust the path as necessary
+import logo from '../assets/logo512.png';
+import Dropdown from './Dropdown';
 
 function Header({ title, subtitle, toggleSidebar }) {
   const { user, logout } = useContext(AuthContext);
 
   return (
-    <header className="site-header">
-<div className="header-top">
-  <div className="header-left">
-    <button onClick={toggleSidebar} className="sidebar-button">☰</button>
-    <img src={logo} alt="Site Logo" className="site-logo" />
-    <div className="site-title">
-      <h1 className="header-title">{title}</h1>
-      {subtitle && <p className="header-subtitle">{subtitle}</p>}
-    </div>
-  </div>
+    <header className="sticky top-0 z-[999] w-full bg-white/10 backdrop-blur-md text-white shadow-md">
+      {/* Top Bar */}
+      <div className="flex items-center justify-between px-6 py-4">
+        <div className="flex items-center gap-4">
+          <button
+            onClick={toggleSidebar}
+            className="text-xl p-2 bg-white/20 rounded-md hover:bg-white/30 transition"
+          >
+            ☰
+          </button>
 
-  <div className="header-right">
-    {user ? (
-      <>
-        <span className="nav-text">Welcome, {user.email}</span>
-        <button className="nav-link logout-button" onClick={logout}>
-          Logout
-        </button>
-      </>
-    ) : (
-      <>
-        <Link className="nav-link" to="/login">Login</Link>
-        <Link className="nav-link" to="/create">Create an account</Link>
-      </>
-    )}
-  </div>
-</div>
-
-
-      <nav className="navbar">
-        <Link className="nav-link" to="/">Home</Link>
-        <Link className="nav-link" to="/skills">Skills</Link>
-        <Link className="nav-link" to="/projects">Projects</Link>
-        
-        <div className="dropdown">
-          <span className='nav-link dropdown-toggle'>About Me</span>
-            <ul className="dropdown-menu">
-              <li><Link className="dropdown-item" to="/about">About</Link></li>
-              <li><Link className="dropdown-item" to="/contact">Contact</Link></li>
-              <li><Link className="dropdown-item" to="/education">Education</Link></li>
-            </ul>
+          <img src={logo} alt="Site Logo" className="h-10" />
+          <div>
+            <h1 className="text-xl font-bold">{title}</h1>
+            {subtitle && <p className="text-sm text-gray-200">{subtitle}</p>}
+          </div>
         </div>
-        
 
-        <div className="dropdown">
-          <span className="nav-link dropdown-toggle">More</span>
-          <ul className="dropdown-menu">
-            <li><Link className="dropdown-item" to="/togglemessage">Toggle Message</Link></li>
-            <li><Link className="dropdown-item" to="/nameinput">Name Input</Link></li>
-            <li><Link className="dropdown-item" to="/webcam">WEBCAM</Link></li>
-            <li><Link className="dropdown-item" to="/datafetcher">Data Fetcher</Link></li>
-            <li><Link className="dropdown-item" to="/counter">Counter</Link></li>
-          </ul>
+        <div className="flex items-center gap-4">
+          {user ? (
+            <>
+              <span className="text-sm text-gray-100">Welcome, {user.email}</span>
+              <button
+                onClick={logout}
+                className="text-sm px-3 py-1 bg-red-600 hover:bg-red-700 rounded"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="text-sm hover:underline">
+                Login
+              </Link>
+              <Link to="/create" className="text-sm hover:underline">
+                Create Account
+              </Link>
+            </>
+          )}
         </div>
+      </div>
+
+      {/* Navigation Bar */}
+      <nav className="flex justify-center gap-6 py-2 border-t border-white/10">
+        <Link className="hover:text-blue-400" to="/">Home</Link>
+        <Link className="hover:text-blue-400" to="/skills">Skills</Link>
+        <Link className="hover:text-blue-400" to="/projects">Projects</Link>
+
+        <Dropdown
+          label="About"
+          items={[
+            { label: 'About Me', href: '/about' },
+            { label: 'Contact', href: '/contact' },
+            { label: 'Education', href: '/education' },
+          ]}
+        />
+
+          <Dropdown
+            label="More Links"
+            items={[
+              { label: 'Toggle Message', href: '/togglemessage' },
+              { label: 'Name Input', href: '/nameinput' },
+              { label: 'Webcam', href: '/webcam' },
+              { label: 'Data Fetcher', href: '/datafetcher' },
+              { label: 'Counter', href: '/counter' }
+            ]}
+          />
+
       </nav>
     </header>
   );
 }
-
 
 export default Header;

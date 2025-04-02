@@ -1,74 +1,46 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-const Dropdown = () => {
-    const [isOpen, setIsOpen] = useState(false)
-    const options = ['1', '2', '3']
-    const dropdownRef = useRef(null);
+function Dropdown({ label, items }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef();
 
-    const toggleDropdown = () => {
-        setIsOpen(prev => !prev);
-    };
-
-    const handleOptionClick = (option) => {
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
         setIsOpen(false);
+      }
     };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                setIsOpen(false);
-            }
-        };
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="cursor-pointer hover:text-blue-400"
+      >
+        {label}
+      </button>
 
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside)
-    }, []);
-
-    return (
-        <div ref={dropdownRef} style={{position: 'relative', width: '200px'}}>
-            <div
-                onClick={toggleDropdown}
-                style={{
-                    padding: '10px',
-                    border: '1px solid #ccc',
-                    cursor: 'pointer',
-                    userSelect: 'none'
-                }}
+      {isOpen && (
+        <div className="absolute left-0 mt-2 bg-white/10 backdrop-blur text-sm text-white p-2 rounded shadow z-50 space-y-1">
+          {items.map((item, idx) => (
+            <Link
+              key={idx}
+              to={item.href}
+              className="block hover:text-blue-300"
+              onClick={() => setIsOpen(false)} // close on click
             >
-                -==
-            </div>
-
-            {isOpen && (
-                <ul
-                    style={{
-                        listStyle: 'none',
-                        padding: 0,
-                        margin: 0,
-                        border: '1px solid #ccc',
-                        borderTop: 'none',
-                        position: 'absolute',
-                        width: '100%',
-                        backgroundColor: '#fff',
-                        zIndex: 1000
-                    }}
-                >
-                    {options.map((option, index) => (
-                        <li
-                        key={index}
-                        onClick={() => handleOptionClick(option)}
-                        style={{
-                            padding: '10px',
-                            cursor: 'pointer',
-                            borderBottom: '1px solid #eee'
-                        }}
-                        >
-                            {option}
-                        </li>
-                    ))}
-                </ul>
-            )}
+              {item.label}
+            </Link>
+          ))}
         </div>
-    )
+      )}
+    </div>
+  );
 }
 
 export default Dropdown;

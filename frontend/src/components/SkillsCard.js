@@ -1,5 +1,5 @@
 import React from 'react';
-import './SkillsCard.css';
+// import './SkillsCard.css';
 
 function SkillsCard({ name, icon }) {
   return (

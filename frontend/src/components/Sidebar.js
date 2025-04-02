@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { HashLink } from 'react-router-hash-link';
-import './Sidebar.css'; // make sure you create this file for styling
 
 function Sidebar() {
   const [activeSection, setActiveSection] = useState('');
@@ -11,7 +10,7 @@ function Sidebar() {
       let current = '';
 
       sections.forEach((section) => {
-        const offset = section.offsetTop - 120; // adjust buffer
+        const offset = section.offsetTop - 120;
         const height = section.offsetHeight;
         if (window.scrollY >= offset && window.scrollY < offset + height) {
           current = section.id;
@@ -22,44 +21,34 @@ function Sidebar() {
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // initial trigger
+    handleScroll(); // on mount
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const navItems = [
+    { id: 'top', label: 'Back to Top' },
+    { id: 'education', label: 'Education' },
+    { id: 'experience', label: 'Experience' },
+    { id: 'skills', label: 'Skills' }
+  ];
+
   return (
-    <div className="homepage-sidebar">
-      <nav>
-        <HashLink
-          smooth
-          to="#top"
-          className={activeSection === 'top' ? 'active' : ''}
-        >
-          Back to the top
-        </HashLink>
-        <br />
-        <HashLink
-          smooth
-          to="#education"
-          className={activeSection === 'education' ? 'active' : ''}
-        >
-          Education
-        </HashLink>
-        <br />
-        <HashLink
-          smooth
-          to="#experience"
-          className={activeSection === 'experience' ? 'active' : ''}
-        >
-          Experience
-        </HashLink>
-        <br />
-        <HashLink
-          smooth
-          to="#skills"
-          className={activeSection === 'skills' ? 'active' : ''}
-        >
-          Skills
-        </HashLink>
+    <div className="fixed top-1/4 left-4 z-[998] bg-white/10 backdrop-blur-md p-4 rounded-xl shadow-lg space-y-4 text-sm text-white">
+      <nav className="flex flex-col gap-3">
+        {navItems.map((item) => (
+          <HashLink
+            key={item.id}
+            smooth
+            to={`#${item.id}`}
+            className={`transition-colors px-3 py-1 rounded hover:bg-blue-500 hover:text-white ${
+              activeSection === item.id
+                ? 'bg-blue-600 text-white font-bold'
+                : 'text-gray-200'
+            }`}
+          >
+            {item.label}
+          </HashLink>
+        ))}
       </nav>
     </div>
   );
