@@ -5,6 +5,8 @@ import Experience from './Experience';
 import Sidebar from '../components/Sidebar';
 import Education from './Education';
 import About from './About';
+import Repos from './Repos';
+
 
 function Home() {
     return (
@@ -14,6 +16,11 @@ function Home() {
                 <Hero />
             </section>
             <About />
+
+            <section id="projects" className='m-10'>
+            <Repos />
+            </section>
+
             <section id="education">
                 <Education />
             </section>

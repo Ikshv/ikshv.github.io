@@ -1,5 +1,4 @@
 import React from 'react';
-import Repos from './Repos';
 
 function About() {
   return (
