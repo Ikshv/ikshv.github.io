@@ -7,7 +7,6 @@ import {
   SiRedux, SiExpress, SiMongodb, SiPython, SiPostgresql, 
   SiFlask, SiSqlite, SiTensorflow 
 } from 'react-icons/si';
-import SkillsCard from '../components/SkillsCard';
 import SkillCategory from '../components/SkillCategory';
 
 // Languages skills array
