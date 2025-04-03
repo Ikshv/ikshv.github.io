@@ -1,7 +1,7 @@
 import React from 'react';
 // import './Skills.css';
 import { 
-  DiJavascript1, DiReact, DiCss3, DiHtml5, DiNodejs, DiJava, 
+  DiJavascript1, DiReact, DiCss3, DiNodejs, 
   DiRuby
 } from 'react-icons/di';
 import { 
