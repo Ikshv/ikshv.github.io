@@ -1,11 +1,15 @@
 import React from 'react';
 // import './Skills.css';
 import { 
-  DiJavascript1, DiReact, DiCss3, DiHtml5, DiNodejs, DiJava 
+  DiJavascript1, DiReact, DiCss3, DiHtml5, DiNodejs, DiJava, 
+  DiRuby
 } from 'react-icons/di';
 import { 
   SiRedux, SiExpress, SiMongodb, SiPython, SiPostgresql, 
-  SiFlask, SiSqlite, SiTensorflow 
+  SiFlask, SiSqlite, SiTensorflow, SiTailwindcss,
+  SiMysql,
+  SiGit,
+  SiGithub
 } from 'react-icons/si';
 import SkillCategory from '../components/SkillCategory';
 
@@ -20,8 +24,8 @@ const languagesSkills = [
         icon: <SiPython size={32} color="#3776AB" />
     },
     {
-        name: 'Java',
-        icon: <DiJava size={32} color="#007396" />
+        name: 'Ruby',
+        icon: <DiRuby size={32} color="#CC342D" />
     }
 ];
 
@@ -30,14 +34,6 @@ const frontendSkills = [
     {
         name: 'React',
         icon: <DiReact size={32} color="#61DBFB" />
-    },
-    {
-        name: 'CSS',
-        icon: <DiCss3 size={32} color="#264de4" />
-    },
-    {
-        name: 'HTML',
-        icon: <DiHtml5 size={32} color="#e34c26" />
     },
     {
         name: 'Redux',
@@ -72,17 +68,39 @@ const databasesSkills = [
         icon: <SiPostgresql size={32} color="#336791" />
     },
     {
+        name: 'MySQL',
+        icon: <SiMysql size={32} color="#4479A1" />
+    },
+    {
         name: 'SQLite',
         icon: <SiSqlite size={32} color="#003B57" />
     }
 ];
 
-// Libraries & Tools skills array
-const toolsSkills = [
+const stylingTools = [
     {
-        name: 'TensorFlow',
-        icon: <SiTensorflow size={32} color="#FF6F00" />
+      name: 'CSS3',
+      icon: <DiCss3 size={32} color="#264de4" />
+    },  
+    {
+        name: 'Tailwind CSS',
+        icon: <SiTailwindcss size={32} color="#06B6D4" />
     }
+];
+
+const developerTools = [
+    {
+        name: 'Git',
+        icon: <SiGit size={32} color="#F05032" />
+    },
+    {
+        name: 'GitHub',
+        icon: <SiGithub size={32} color="#181717" />
+    },
+    {
+      name: 'TensorFlow',
+      icon: <SiTensorflow size={32} color="#FF6F00" />
+  }
 ];
 
 function Skills() {
@@ -92,13 +110,13 @@ function Skills() {
         className="max-w-5xl mx-auto px-6 py-12 text-white text-center"
       >
         <h2 className="text-4xl font-bold mb-12">Skills</h2>
-        <div className="space-y-12 border border-white/30 p-6 rounded-lg bg-white/10 backdrop-blur-md">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start border border-white/30 p-6 rounded-lg bg-white/10 backdrop-blur-md">
           <SkillCategory title="Languages" skills={languagesSkills} />
-          <SkillCategory title="Frontend" skills={frontendSkills} />
-          <SkillCategory title="Backend" skills={backendSkills} />
+          <SkillCategory title="Frontend Libraries / Frameworks" skills={frontendSkills} />
+          <SkillCategory title="Styling Tools / UI Framework" skills={stylingTools} />
+          <SkillCategory title="Backend/Server" skills={backendSkills} />
           <SkillCategory title="Databases" skills={databasesSkills} />
-          <SkillCategory title="Libraries & Tools" skills={toolsSkills} />
-
+          <SkillCategory title="Developer Tools / Libraries" skills={developerTools} />
         </div>
       </section>
     );
