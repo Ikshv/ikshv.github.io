@@ -1,11 +1,13 @@
 import React from 'react';
 import Hero from '../components/Hero';
 import Skills from './Skills';
-import Experience from './Experience';
 import Sidebar from '../components/Sidebar';
-import Education from './Education';
-import About from './About';
 import Repos from './Repos';
+import HighlightsRow from '../components/HighlightsRow';
+import Contact from './Contact';
+import AboutSummary from '../components/AboutSummary';
+import SkillsPreview from '../components/SkillsPreview';
+import { Link } from 'react-router-dom';
 
 
 function Home() {
@@ -15,23 +17,11 @@ function Home() {
             <section id="top">
                 <Hero />
             </section>
-            <About />
-
-            <section id="projects" className='m-10'>
-            <Repos />
-            </section>
-
-            <section id="education">
-                <Education />
-            </section>
-
-            <section id="experience">
-                <Experience />
-            </section>
-
-            <section id="skills">
-                <Skills />
-            </section>
+            <HighlightsRow />
+            <AboutSummary />
+            <SkillsPreview />
+            
+            <Contact />
 
             {/* Add other sections here in similar format */}
         </main>

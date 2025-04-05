@@ -51,31 +51,22 @@ function Header({ title, subtitle, toggleSidebar }) {
       </div>
 
       {/* Navigation Bar */}
-      <nav className="flex justify-center gap-6 py-2 border-t border-white/10">
-        <Link className="hover:text-blue-400" to="/">Home</Link>
-        <Link className="hover:text-blue-400" to="/skills">Skills</Link>
-        <Link className="hover:text-blue-400" to="/projects">Projects</Link>
+      <nav className="flex justify-center gap-6 py-2 border-t border-white/10 text-sm font-medium">
+        <Link className="hover:text-blue-400 transition" to="/">Home</Link>
+        <Link className="hover:text-blue-400 transition" to="/projects">Projects</Link>
+        <Link className="hover:text-blue-400 transition" to="/skills">Skills</Link>
+
+        <Link className="hover:text-blue-400 transition" to="/about">About</Link>
+
 
         <Dropdown
-          label="About"
+          label="Playground"
           items={[
-            { label: 'About Me', href: '/about' },
-            { label: 'Contact', href: '/contact' },
-            { label: 'Education', href: '/education' },
+            { label: 'Webcam Demo', href: '/webcam' },
+            { label: 'Data Fetcher', href: '/datafetcher' },
+            { label: 'Counter Demo', href: '/counter' }
           ]}
         />
-
-          <Dropdown
-            label="More Links"
-            items={[
-              { label: 'Toggle Message', href: '/togglemessage' },
-              { label: 'Name Input', href: '/nameinput' },
-              { label: 'Webcam', href: '/webcam' },
-              { label: 'Data Fetcher', href: '/datafetcher' },
-              { label: 'Counter', href: '/counter' }
-            ]}
-          />
-
       </nav>
     </header>
   );

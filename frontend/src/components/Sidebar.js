@@ -3,7 +3,7 @@ import { HashLink } from 'react-router-hash-link';
 
 function Sidebar() {
   const [activeSection, setActiveSection] = useState('');
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,11 +28,12 @@ function Sidebar() {
 
   const navItems = [
     { id: 'top', label: 'Back to Top' },
-    { id: 'education', label: 'Education' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'skills', label: 'Skills' }
+    { id: 'highlights', label: 'Highlights' },
+    { id: 'aboutsummary', label: 'About Me' },
+    { id: 'skillspreview', label: 'Skills' },
+    { id: 'contact', label: 'Contact' }
   ];
-
+  
   return (
     <div
       className={`fixed top-1/4 z-50 transition-transform duration-300 ${

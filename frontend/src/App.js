@@ -22,12 +22,14 @@ import Education from './pages/Education';
 
 import { AnimatePresence } from 'framer-motion';
 import Contact from './pages/Contact';
-import About from './pages/About';
+import AboutPage from './pages/AboutPage';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
       <AppLayout>
         <AnimatePresence mode="wait">
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/hello" element={<Hello name="world" />} />
@@ -43,7 +45,7 @@ function App() {
           <Route path="/skills" element={<Skills />} />
           <Route path="/education" element={<Education />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route
             path="/dashboard"
             element={
