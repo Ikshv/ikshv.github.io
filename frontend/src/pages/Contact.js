@@ -5,7 +5,7 @@ function Contact() {
   return (
     <section
       id="contact"
-      className="max-w-3xl mx-auto px-6 py-20 text-white text-center"
+      className="max-w-3xl mx-auto px-6 py-10 text-white text-center"
     >
       <h2 className="text-4xl font-bold mb-6">Let’s Connect</h2>
       <p className="text-lg mb-10 text-gray-300">
