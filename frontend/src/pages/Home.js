@@ -17,7 +17,9 @@ function Home() {
             <section id="top">
                 <Hero />
             </section>
-            <HighlightsRow />
+            <section id="featured">
+                <HighlightsRow />
+            </section>
             <AboutSummary />
             <SkillsPreview />
             

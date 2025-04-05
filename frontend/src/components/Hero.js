@@ -85,15 +85,25 @@ function Hero() {
       </div>
 
       {/* Scroll Down */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.6 }}
-        className="absolute bottom-[10vh] left-1/2 transform -translate-x-1/2 text-white/60 animate-bounce text-sm flex items-center gap-1"
+      <HashLink
+        smooth
+        to="#featured" // change this to the ID of the next section
+        scroll={(el) => {
+          const yOffset = -60; // adjust for sticky header height
+          const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }}
       >
-        <BsChevronDown size={16} />
-        Scroll down
-      </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5, duration: 0.6 }}
+          className="absolute bottom-[10vh] left-1/2 transform -translate-x-1/2 text-white/60 animate-bounce text-sm flex items-center gap-1 cursor-pointer"
+        >
+          <BsChevronDown size={16} />
+          Scroll down
+        </motion.div>
+      </HashLink>
     </section>
   );
 }
