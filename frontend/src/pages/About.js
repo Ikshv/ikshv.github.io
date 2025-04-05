@@ -6,7 +6,7 @@ function About() {
   return (
     <section
       id="about"
-      className="max-w-5xl mx-auto px-6 py-16 text-white space-y-10"
+      className="max-w-5xl mx-auto px-6 py-4 text-white space-y-10"
     >
       {/* Section Title */}
       <div className="text-center">
