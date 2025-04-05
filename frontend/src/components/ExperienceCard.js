@@ -1,64 +1,42 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './ExperienceCard.css';
 
-function ExperienceCard({
-  jobTitle,
-  companyName,
-  location,
-  startDate,
-  endDate,
-  description,
-  projects
-}) {
-  const [showProjects, setShowProjects] = useState(false);
-  const toggleProjects = () => setShowProjects(prev => !prev);
-
+function ExperienceCard({ jobTitle, companyName, startDate, endDate, description, projects }) {
   return (
-    <article className="experience-card">
-      <div className="experience-header">
-        <div className="title-company">
-          <h3>{jobTitle}</h3>
-          <h4>{companyName}</h4>
-        </div>
-        <div className="meta">
-          {location && <span>{location}</span>}
-          <span>{startDate} – {endDate}</span>
-        </div>
+    <div className="bg-white/10 backdrop-blur-md p-6 rounded-lg border border-white/20 shadow-md hover:shadow-xl transition-all">
+      <div className="mb-4">
+        <h3 className="text-xl font-bold text-white">{jobTitle}</h3>
+        <p className="text-sm text-gray-300">{companyName} | {startDate} - {endDate}</p>
+        <p className="mt-2 text-gray-300 text-sm">{description}</p>
       </div>
 
-      <p className="role-summary">{description}</p>
+      {projects && projects.map((project, index) => (
+        <div key={index} className="mt-4 bg-white/5 p-4 rounded-md border border-white/10">
+          <h4 className="text-md font-semibold text-white mb-1">{project.name}</h4>
+          <p className="text-sm text-gray-200 mb-2">{project.summary}</p>
 
-      {projects?.length > 0 && (
-        <>
-          <button className="toggle-projects-btn" onClick={toggleProjects}>
-            {showProjects ? 'Hide Projects' : 'Show Projects'}
-          </button>
-
-          <div className={`projects-wrapper ${showProjects ? 'open' : ''}`}>
-            <div className="projects-list">
-              {projects.map((project, index) => (
-                <div key={index} className="project-card">
-                  <h5 className="project-title">{project.name}</h5>
-                  <p className="project-summary">{project.summary}</p>
-
-                  <div className="tech-stack">
-                    {project.technologies.map((tech, idx) => (
-                      <span key={idx} className="tech-badge">{tech}</span>
-                    ))}
-                  </div>
-
-                  <ul className="highlights">
-                    {project.highlights.map((point, idx) => (
-                      <li key={idx}>{point}</li>
-                    ))}
-                  </ul>
-                </div>
+          <div className="mb-2">
+            <p className="text-xs text-gray-400 font-semibold">Technologies:</p>
+            <div className="flex flex-wrap gap-2 mt-1">
+              {project.technologies.map((tech, i) => (
+                <span
+                  key={i}
+                  className="bg-blue-500/20 text-blue-200 px-2 py-1 text-xs rounded"
+                >
+                  {tech}
+                </span>
               ))}
             </div>
           </div>
-        </>
-      )}
-    </article>
+
+          <ul className="list-disc list-inside text-sm text-gray-300">
+            {project.highlights.map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
   );
 }
 

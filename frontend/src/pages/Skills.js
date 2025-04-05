@@ -1,126 +1,68 @@
 import React from 'react';
-// import './Skills.css';
-import { 
-  DiJavascript1, DiReact, DiCss3, DiNodejs, 
-  DiRuby
+import {
+  DiJavascript1, DiReact, DiCss3, DiHtml5, DiNodejs, DiJava
 } from 'react-icons/di';
-import { 
-  SiRedux, SiExpress, SiMongodb, SiPython, SiPostgresql, 
-  SiFlask, SiSqlite, SiTensorflow, SiTailwindcss,
-  SiMysql,
-  SiGit,
-  SiGithub
+import {
+  SiRedux, SiExpress, SiMongodb, SiPython, SiPostgresql,
+  SiFlask, SiSqlite, SiTensorflow, SiTailwindcss, SiMysql,
+  SiGit, SiGithub
 } from 'react-icons/si';
-import SkillCategory from '../components/SkillCategory';
 
-// Languages skills array
-const languagesSkills = [
-    {
-        name: 'JavaScript',
-        icon: <DiJavascript1 size={32} color="#F0DB4F" />
-    },
-    {
-        name: 'Python',
-        icon: <SiPython size={32} color="#3776AB" />
-    },
-    {
-        name: 'Ruby',
-        icon: <DiRuby size={32} color="#CC342D" />
-    }
-];
-
-// Frontend skills array
-const frontendSkills = [
-    {
-        name: 'React',
-        icon: <DiReact size={32} color="#61DBFB" />
-    },
-    {
-        name: 'Redux',
-        icon: <SiRedux size={32} color="#764ABC" />
-    }
-];
-
-// Backend skills array
-const backendSkills = [
-    {
-        name: 'Node.js',
-        icon: <DiNodejs size={32} color="#68A063" />
-    },
-    {
-        name: 'Express',
-        icon: <SiExpress size={32} color="#000000" />
-    },
-    {
-        name: 'Flask',
-        icon: <SiFlask size={32} color="#000000" />
-    }
-];
-
-// Databases skills array
-const databasesSkills = [
-    {
-        name: 'MongoDB',
-        icon: <SiMongodb size={32} color="#4DB33D" />
-    },
-    {
-        name: 'PostgreSQL',
-        icon: <SiPostgresql size={32} color="#336791" />
-    },
-    {
-        name: 'MySQL',
-        icon: <SiMysql size={32} color="#4479A1" />
-    },
-    {
-        name: 'SQLite',
-        icon: <SiSqlite size={32} color="#003B57" />
-    }
-];
-
-const stylingTools = [
-    {
-      name: 'CSS3',
-      icon: <DiCss3 size={32} color="#264de4" />
-    },  
-    {
-        name: 'Tailwind CSS',
-        icon: <SiTailwindcss size={32} color="#06B6D4" />
-    }
-];
-
-const developerTools = [
-    {
-        name: 'Git',
-        icon: <SiGit size={32} color="#F05032" />
-    },
-    {
-        name: 'GitHub',
-        icon: <SiGithub size={32} color="#181717" />
-    },
-    {
-      name: 'TensorFlow',
-      icon: <SiTensorflow size={32} color="#FF6F00" />
-  }
-];
+const skills = {
+  Languages: [
+    { icon: <DiJavascript1 color="#f7df1e" />, name: 'JavaScript' },
+    { icon: <SiPython color="#3572A5" />, name: 'Python' },
+    { icon: <DiJava color="#b07219" />, name: 'Java' }
+  ],
+  Frontend: [
+    { icon: <DiReact color="#61dafb" />, name: 'React' },
+    { icon: <SiRedux color="#764abc" />, name: 'Redux' },
+    { icon: <DiHtml5 color="#e34c26" />, name: 'HTML5' },
+    { icon: <DiCss3 color="#264de4" />, name: 'CSS3' },
+    { icon: <SiTailwindcss color="#38bdf8" />, name: 'Tailwind CSS' }
+  ],
+  Backend: [
+    { icon: <DiNodejs color="#3c873a" />, name: 'Node.js' },
+    { icon: <SiExpress color="#ffffff" />, name: 'Express' },
+    { icon: <SiFlask color="#000000" />, name: 'Flask' }
+  ],
+  Databases: [
+    { icon: <SiMongodb color="#4DB33D" />, name: 'MongoDB' },
+    { icon: <SiPostgresql color="#336791" />, name: 'PostgreSQL' },
+    { icon: <SiMysql color="#00758F" />, name: 'MySQL' },
+    { icon: <SiSqlite color="#003B57" />, name: 'SQLite' }
+  ],
+  Tools: [
+    { icon: <SiGit color="#F05032" />, name: 'Git' },
+    { icon: <SiGithub color="#ffffff" />, name: 'GitHub' },
+    { icon: <SiTensorflow color="#FF6F00" />, name: 'TensorFlow' }
+  ]
+};
 
 function Skills() {
-    return (
-      <section
-        id="skills"
-        className="max-w-5xl mx-auto px-6 py-12 text-white text-center"
-      >
-        <h2 className="text-4xl font-bold mb-12">Skills</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start border border-white/30 p-6 rounded-lg bg-white/10 backdrop-blur-md">
-          <SkillCategory title="Languages" skills={languagesSkills} />
-          <SkillCategory title="Frontend Libraries / Frameworks" skills={frontendSkills} />
-          <SkillCategory title="Styling Tools / UI Framework" skills={stylingTools} />
-          <SkillCategory title="Backend/Server" skills={backendSkills} />
-          <SkillCategory title="Databases" skills={databasesSkills} />
-          <SkillCategory title="Developer Tools / Libraries" skills={developerTools} />
-        </div>
-      </section>
-    );
-  }
-  
+  return (
+    <section className="text-white max-w-5xl mx-auto px-6 py-10">
+      <h2 className="text-3xl font-bold mb-6 text-center">Skills</h2>
+      <div className="space-y-8">
+        {Object.entries(skills).map(([category, items], idx) => (
+          <div key={idx}>
+            <h3 className="text-xl font-semibold mb-4">{category}</h3>
+            <div className="flex flex-wrap gap-4">
+              {items.map((skill, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-2 px-3 py-2 bg-white/10 backdrop-blur rounded-md border border-white/20 text-sm"
+                >
+                  <span className="text-lg">{skill.icon}</span>
+                  <span>{skill.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 export default Skills;
