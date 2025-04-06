@@ -8,6 +8,7 @@ import Contact from './Contact';
 import AboutSummary from '../components/AboutSummary';
 import SkillsPreview from '../components/SkillsPreview';
 import { Link } from 'react-router-dom';
+import ProjectsPage from './ProjectsPage';
 
 
 function Home() {
@@ -21,6 +22,7 @@ function Home() {
                 <HighlightsRow />
             </section>
             <AboutSummary />
+            <ProjectsPage /> {/* This will render the ProjectsPage component */}
             <SkillsPreview />
             
             <Contact />
