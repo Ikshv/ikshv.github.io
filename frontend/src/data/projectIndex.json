@@ -1,6 +1,6 @@
 [
   {
-    "title": "Template ML Project",
+    "name": "Template ML Project",
     "slug": "template-ml-project",
     "tags": [
       "ML",
@@ -8,7 +8,7 @@
       "Template"
     ],
     "demo": "",
-    "github": "https://github.com/ikshv/template-ml-project",
+    "github": "https://github.com/ikshv/hdc-ml-classifier",
     "live": true
   },
   {
