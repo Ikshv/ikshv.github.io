@@ -15,16 +15,11 @@ function Home() {
     return (
         <main className="home">
             <Sidebar /> {/* or Sidebar, if that's your final one */}
-            <section id="top">
-                <Hero />
-            </section>
-            <section id="featured">
-                <HighlightsRow />
-            </section>
-            <AboutSummary />
+            <section id="top"><Hero /></section>
+            <section id="highlights"><HighlightsRow /></section>
+            <section id="aboutsummary"><AboutSummary /></section>
+            <section id="skillspreview"><SkillsPreview /></section>            
             <ProjectsPage /> {/* This will render the ProjectsPage component */}
-            <SkillsPreview />
-            
             <Contact />
 
             {/* Add other sections here in similar format */}

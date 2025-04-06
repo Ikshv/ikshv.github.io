@@ -9,7 +9,7 @@ function Sidebar() {
     const handleScroll = () => {
       const sections = document.querySelectorAll('section[id]');
       let current = '';
-
+  
       sections.forEach((section) => {
         const offset = section.offsetTop - 120;
         const height = section.offsetHeight;
@@ -17,22 +17,32 @@ function Sidebar() {
           current = section.id;
         }
       });
-
+  
       setActiveSection(current);
+  
+      // Automatically open when scrolled down past Hero
+      if (window.scrollY > 300) {
+        setIsOpen(true);
+      } else {
+        setIsOpen(false);
+      }
     };
-
+  
     window.addEventListener('scroll', handleScroll);
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
 
   const navItems = [
-    { id: 'top', label: 'Back to Top' },
+    { id: 'top', label: 'Top' },
     { id: 'highlights', label: 'Highlights' },
     { id: 'aboutsummary', label: 'About Me' },
     { id: 'skillspreview', label: 'Skills' },
+    { id: 'projects', label: 'Projects' },
     { id: 'contact', label: 'Contact' }
   ];
+  
   
   return (
     <div
