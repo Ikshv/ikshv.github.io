@@ -1,14 +1,14 @@
 [
   {
-    "name": "Template ML Project",
-    "slug": "template-ml-project",
+    "title": "HDC ML Classifier",
+    "slug": "hdc-ml-classifier",
     "tags": [
       "ML",
       "Python",
       "HDC"
     ],
-    "demo": "",
-    "github": "https://github.com/ikshv/hdc-ml-classifier",
+    "demo": "https://your-app-link.com",
+    "github": "https://github.com/Ikshv/hdc-ml-classifier",
     "live": true
   },
   {
