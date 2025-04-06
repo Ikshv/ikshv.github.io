@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Smart Shrimp Tank Monitor",
+    "description": "An IoT and AI-powered system to monitor shrimp tank health using sensors and computer vision.",
+    "tags": ["AI/ML", "IoT", "Computer Vision"],
+    "date": "2024-11-15",
+    "demo": "https://coolshrimps.io/demo",
+    "github": "https://github.com/ikshv/shrimp-tank-monitor"
+  },
+  {
+    "title": "DevOps Deployment Pipeline",
+    "description": "Built a CI/CD pipeline using GitHub Actions, Docker, and Kubernetes for a scalable microservices architecture.",
+    "tags": ["DevOps", "CI/CD", "Docker"],
+    "date": "2023-09-10",
+    "github": "https://github.com/ikshv/devops-pipeline"
+  },
+  {
+    "title": "Personal Portfolio",
+    "description": "Full-featured portfolio built with React, Tailwind, and Framer Motion. Deployed via Vercel.",
+    "tags": ["Full Stack", "React", "Tailwind"],
+    "date": "2024-07-01",
+    "demo": "https://ikshv.vercel.app",
+    "github": "https://github.com/ikshv/portfolio"
+  },
+  {
+    "title": "Reverse Engineering APKs",
+    "description": "Developed a tool that uses machine learning to analyze obfuscated Android apps and identify vulnerabilities.",
+    "tags": ["AI/ML", "Security", "Reverse Engineering"],
+    "date": "2024-06-01",
+    "github": "https://github.com/ikshv/reverse-apk-analyzer"
+  }
+]
