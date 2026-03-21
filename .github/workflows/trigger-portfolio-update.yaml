@@ -8,6 +8,8 @@ on:
 jobs:
   notify-portfolio:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Send dispatch to portfolio site
         run: |
