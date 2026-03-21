@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import projectData from '../data/projectIndex.json';
 import { motion } from 'framer-motion';
 

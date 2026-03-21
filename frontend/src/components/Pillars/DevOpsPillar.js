@@ -1,6 +1,6 @@
 import React from 'react';
-import { FaGithub, FaDocker } from 'react-icons/fa';
-import { SiGithubactions, SiNextdotjs } from 'react-icons/si';
+import { FaGithub } from 'react-icons/fa';
+import { SiNextdotjs } from 'react-icons/si';
 import { Link } from 'react-router-dom';
 
 const DevOpsPillar = () => {

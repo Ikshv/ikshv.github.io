@@ -1,6 +1,5 @@
 import React from 'react';
 import { FaReact, FaDatabase } from 'react-icons/fa';
-import { SiTailwindcss, SiMongodb } from 'react-icons/si';
 import { Link } from 'react-router-dom';
 
 const FullStackPillar = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaCode, FaTools, FaMusic } from 'react-icons/fa';
+import { FaCode, FaTools } from 'react-icons/fa';
 import { MdArchitecture, MdDevicesOther } from 'react-icons/md';
 
 function About() {
