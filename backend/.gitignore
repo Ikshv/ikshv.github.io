@@ -12,3 +12,6 @@ npm-debug.log*
 
 # OS files
 .DS_Store
+
+# Local user database (hashed passwords)
+data/users.json

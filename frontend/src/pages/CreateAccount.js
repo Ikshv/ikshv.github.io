@@ -14,7 +14,13 @@ function CreateAccount() {
     const payload = { email: username, password };
 
     try {
-        const apiUrl = process.env.REACT_APP_API_URL;
+      const apiUrl = process.env.REACT_APP_API_URL;
+      if (!apiUrl) {
+        setMessage(
+          'API URL is not configured. Set REACT_APP_API_URL (see frontend/.env.example).'
+        );
+        return;
+      }
       const response = await fetch(`${apiUrl}/api/register`, {
         method: 'POST',
         headers: {
