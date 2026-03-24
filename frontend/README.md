@@ -2,6 +2,17 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Supabase (login / sign-up)
+
+Auth uses Supabase. Copy `.env.example` to **`.env.local`** in this folder and set:
+
+- `REACT_APP_SUPABASE_URL` — Project URL (`https://<project-ref>.supabase.co`)
+- `REACT_APP_SUPABASE_ANON_KEY` — **anon** / public key (Dashboard → Project Settings → API)
+
+Never put the **service_role** key in the frontend.
+
+**Production:** Set the same two variables in Vercel (or your host) and as GitHub Actions secrets `REACT_APP_SUPABASE_URL` and `REACT_APP_SUPABASE_ANON_KEY` so the GitHub Pages deploy workflow can build with auth enabled.
+
 ## Available Scripts
 
 In the project directory, you can run:
