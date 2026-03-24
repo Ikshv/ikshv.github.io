@@ -1,43 +1,37 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+import { supabase } from '../lib/supabaseClient';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext); // Get login function from context
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
 
+    const url = process.env.REACT_APP_SUPABASE_URL;
+    const key = process.env.REACT_APP_SUPABASE_ANON_KEY;
+    if (!url || !key) {
+      setError(
+        'Supabase is not configured. Add REACT_APP_SUPABASE_URL and REACT_APP_SUPABASE_ANON_KEY (see frontend/.env.example).'
+      );
+      return;
+    }
+
     try {
-      const apiUrl = process.env.REACT_APP_API_URL;
-      if (!apiUrl) {
-        setError(
-          'API URL is not configured. Set REACT_APP_API_URL (see frontend/.env.example).'
-        );
-        return;
-      }
-      const response = await fetch(`${apiUrl}/api/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password,
       });
 
-      const data = await response.json();
-      console.log("JWT:", data.token);
-
-      if (!response.ok) {
-        setError(data.error || 'Login failed');
-      } else {
-        // Use the context's login function to update auth state
-        login(data.token);
-        // Navigate to the dashboard after login
-        navigate('/dashboard');
+      if (signInError) {
+        setError(signInError.message || 'Login failed');
+        return;
       }
+      navigate('/dashboard');
     } catch (err) {
       console.error('Error during login:', err);
       setError('An error occurred. Please try again.');
@@ -51,22 +45,22 @@ function Login() {
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">Email:</label>
-          <input 
-            type="email" 
-            id="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-            required 
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
         <div>
           <label htmlFor="password">Password:</label>
-          <input 
-            type="password" 
-            id="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            required 
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
         <button type="submit">Login</button>

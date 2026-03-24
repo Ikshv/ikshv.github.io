@@ -23,6 +23,9 @@ jobs:
 
       - name: Build the site
         working-directory: frontend
+        env:
+          REACT_APP_SUPABASE_URL: ${{ secrets.REACT_APP_SUPABASE_URL }}
+          REACT_APP_SUPABASE_ANON_KEY: ${{ secrets.REACT_APP_SUPABASE_ANON_KEY }}
         run: npm run build
 
       - name: Deploy to gh-pages

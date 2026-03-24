@@ -1,45 +1,55 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // optional: for navigation after registration
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '../lib/supabaseClient';
 
 function CreateAccount() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setMessage('');
 
-    // Create the data payload. Adjust keys if your backend expects 'email' instead of 'username'
-    const payload = { email: username, password };
+    const url = process.env.REACT_APP_SUPABASE_URL;
+    const key = process.env.REACT_APP_SUPABASE_ANON_KEY;
+    if (!url || !key) {
+      setMessage(
+        'Supabase is not configured. Add REACT_APP_SUPABASE_URL and REACT_APP_SUPABASE_ANON_KEY (see frontend/.env.example).'
+      );
+      return;
+    }
+
+    if (password.length < 8) {
+      setMessage('Password must be at least 8 characters.');
+      return;
+    }
 
     try {
-      const apiUrl = process.env.REACT_APP_API_URL;
-      if (!apiUrl) {
-        setMessage(
-          'API URL is not configured. Set REACT_APP_API_URL (see frontend/.env.example).'
-        );
-        return;
-      }
-      const response = await fetch(`${apiUrl}/api/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
+      const { data, error } = await supabase.auth.signUp({
+        email: email.trim(),
+        password,
+        options: {
+          data: { role: 'client' },
         },
-        body: JSON.stringify(payload)
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        setMessage(data.error || 'Registration failed');
-      } else {
-        setMessage('Account created successfully!');
-        // Optionally, redirect to the login page or dashboard after successful registration
-        navigate('/login');
+      if (error) {
+        setMessage(error.message || 'Registration failed');
+        return;
       }
-    } catch (error) {
-      console.error('Error creating account:', error);
+
+      if (data.session) {
+        setMessage('Account created. Redirecting…');
+        navigate('/dashboard');
+      } else {
+        setMessage(
+          'Check your email to confirm your account, then sign in.'
+        );
+      }
+    } catch (err) {
+      console.error('Error creating account:', err);
       setMessage('Error creating account');
     }
   };
@@ -49,13 +59,13 @@ function CreateAccount() {
       <h1>Create Account</h1>
       {message && <p>{message}</p>}
       <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username:</label>
+        <label htmlFor="email">Email:</label>
         <input
-          type="text"
-          id="username"
-          name="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          type="email"
+          id="email"
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
         <label htmlFor="password">Password:</label>

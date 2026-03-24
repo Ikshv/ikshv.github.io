@@ -1,44 +1,47 @@
-// src/context/AuthContext.jsx
-import React, { createContext, useState, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
+import { supabase } from '../lib/supabaseClient';
 
 export const AuthContext = createContext();
 
+function mapUser(sessionUser) {
+  if (!sessionUser) return null;
+  const role =
+    sessionUser.user_metadata?.role ||
+    sessionUser.app_metadata?.role ||
+    'client';
+  return {
+    id: sessionUser.id,
+    email: sessionUser.email,
+    role,
+  };
+}
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // optional loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        const decoded = jwtDecode(token);
-        setUser(decoded);
-      } catch (error) {
-        console.error('Error decoding token:', error);
-        setUser(null);
-      }
-    }
-    setLoading(false);
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(mapUser(session?.user ?? null));
+      setLoading(false);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(mapUser(session?.user ?? null));
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
-  const login = (token) => {
-    localStorage.setItem('token', token);
-    try {
-      const decoded = jwtDecode(token);
-      setUser(decoded);
-    } catch (error) {
-      console.error('Error decoding token on login:', error);
-    }
-  };
-
-  const logout = () => {
-    localStorage.removeItem('token');
+  const logout = useCallback(async () => {
+    await supabase.auth.signOut();
     setUser(null);
-  };
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );
