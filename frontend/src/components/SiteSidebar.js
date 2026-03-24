@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 function SiteSidebar({ isOpen, toggleSidebar }) {
+  const { user, logout } = useContext(AuthContext);
   return (
     <>
       {/* Overlay (optional, for mobile UX) */}
@@ -34,6 +36,32 @@ function SiteSidebar({ isOpen, toggleSidebar }) {
           <Link className="hover:text-blue-300" to="/projects" onClick={toggleSidebar}>
             Projects
           </Link>
+          {user ? (
+            <>
+              <Link className="hover:text-blue-300" to="/dashboard" onClick={toggleSidebar}>
+                Dashboard
+              </Link>
+              <button
+                type="button"
+                className="text-left hover:text-blue-300"
+                onClick={() => {
+                  logout();
+                  toggleSidebar();
+                }}
+              >
+                Sign out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link className="hover:text-blue-300" to="/login" onClick={toggleSidebar}>
+                Sign in
+              </Link>
+              <Link className="hover:text-blue-300" to="/create" onClick={toggleSidebar}>
+                Create account
+              </Link>
+            </>
+          )}
         </nav>
       </div>
     </>

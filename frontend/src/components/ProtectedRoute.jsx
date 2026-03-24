@@ -1,19 +1,22 @@
 // src/components/ProtectedRoute.jsx
 import React, { useContext } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
+  const location = useLocation();
 
-  // While checking auth state, you might want to show a loader
   if (loading) {
-    return <div>Loading...</div>; // or null, or a spinner
+    return (
+      <div className="flex justify-center items-center min-h-[40vh] text-white">
+        <p className="text-gray-300">Loading…</p>
+      </div>
+    );
   }
 
-  // Once loading is complete, if there's no user, redirect to login
   if (!user) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
   return children;

@@ -26,24 +26,33 @@ function Header({ title, subtitle, toggleSidebar }) {
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 flex-wrap justify-end">
           {user ? (
             <>
-              <span className="text-sm text-gray-100">Welcome, {user.email}</span>
-              <button
-                onClick={logout}
-                className="text-sm px-3 py-1 bg-red-600 hover:bg-red-700 rounded"
+              <span className="text-sm text-gray-100 max-w-[200px] truncate" title={user.email}>
+                {user.email}
+              </span>
+              <Link
+                to="/dashboard"
+                className="text-sm px-3 py-1 bg-white/15 hover:bg-white/25 rounded transition"
               >
-                Logout
+                Dashboard
+              </Link>
+              <button
+                type="button"
+                onClick={logout}
+                className="text-sm px-3 py-1 bg-red-600 hover:bg-red-700 rounded transition"
+              >
+                Sign out
               </button>
             </>
           ) : (
             <>
-              <Link to="/login" className="text-sm hover:underline">
-                Login
+              <Link to="/login" className="text-sm text-gray-100 hover:text-blue-300 transition">
+                Sign in
               </Link>
-              <Link to="/create" className="text-sm hover:underline">
-                Create Account
+              <Link to="/create" className="text-sm text-gray-100 hover:text-blue-300 transition">
+                Create account
               </Link>
             </>
           )}
@@ -57,7 +66,11 @@ function Header({ title, subtitle, toggleSidebar }) {
         <Link className="hover:text-blue-400 transition" to="/skills">Skills</Link>
 
         <Link className="hover:text-blue-400 transition" to="/about">About</Link>
-
+        {user && (
+          <Link className="hover:text-blue-400 transition" to="/dashboard">
+            Dashboard
+          </Link>
+        )}
 
         <Dropdown
           label="Playground"
