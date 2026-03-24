@@ -2,9 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Supabase (login / sign-up)
+## Supabase (login)
 
-Auth uses Supabase. Copy `.env.example` to **`.env.local`** in this folder and set:
+Auth uses Supabase. New users are not registered from the site; add accounts in the Supabase dashboard (**Authentication → Users**) if you need more logins. Copy `.env.example` to **`.env.local`** in this folder and set:
 
 - `REACT_APP_SUPABASE_URL` — Project URL (`https://<project-ref>.supabase.co`)
 - `REACT_APP_SUPABASE_ANON_KEY` — **anon** / public key (Dashboard → Project Settings → API)

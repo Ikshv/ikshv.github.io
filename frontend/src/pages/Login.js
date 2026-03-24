@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import { AuthFormLayout } from '../components/AuthFormLayout';
 
@@ -42,18 +42,7 @@ function Login() {
   };
 
   return (
-    <AuthFormLayout
-      title="Sign in"
-      subtitle="Use the email and password you registered with."
-      footer={
-        <p>
-          No account?{' '}
-          <Link to="/create" className="text-blue-300 hover:text-blue-200 underline">
-            Create one
-          </Link>
-        </p>
-      }
-    >
+    <AuthFormLayout title="Sign in" subtitle="Use the email and password for your account.">
       {error && (
         <p className="text-red-300 text-sm mb-4 text-center" role="alert">
           {error}

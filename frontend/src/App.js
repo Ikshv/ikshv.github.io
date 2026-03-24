@@ -1,12 +1,11 @@
 // App.jsx
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
-import CreateAccount from './pages/CreateAccount';
 import Hello from './Hello';
 import Counter from './Counter';
 import NameInput from './NameInput';
@@ -41,7 +40,7 @@ function App() {
           <Route path="/projects/new-" element={<UploadProject />} />
           <Route path="/webcam" element={<WebcamPage />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/create" element={<CreateAccount />} />
+          <Route path="/create" element={<Navigate to="/login" replace />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/education" element={<Education />} />
           <Route path="/contact" element={<Contact />} />

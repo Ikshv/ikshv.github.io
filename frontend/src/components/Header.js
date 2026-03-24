@@ -51,9 +51,6 @@ function Header({ title, subtitle, toggleSidebar }) {
               <Link to="/login" className="text-sm text-gray-100 hover:text-blue-300 transition">
                 Sign in
               </Link>
-              <Link to="/create" className="text-sm text-gray-100 hover:text-blue-300 transition">
-                Create account
-              </Link>
             </>
           )}
         </div>

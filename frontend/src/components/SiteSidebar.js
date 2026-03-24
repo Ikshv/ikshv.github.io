@@ -57,9 +57,6 @@ function SiteSidebar({ isOpen, toggleSidebar }) {
               <Link className="hover:text-blue-300" to="/login" onClick={toggleSidebar}>
                 Sign in
               </Link>
-              <Link className="hover:text-blue-300" to="/create" onClick={toggleSidebar}>
-                Create account
-              </Link>
             </>
           )}
         </nav>
