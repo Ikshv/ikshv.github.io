@@ -21,5 +21,6 @@ This project follows these security practices:
 - Regular dependency updates to patch known vulnerabilities
 - No secrets or credentials committed to the repository
 - Environment variables used for sensitive configuration
+- Security scrub completed on 2026-03-25 to remove historical tracked env files
 
 Thank you for helping keep this project secure!
