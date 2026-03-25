@@ -1,7 +1,6 @@
 -- Portfolio projects: single source for /projects, home highlights, and GitHub sync.
--- Run this file only in Supabase SQL Editor (or `supabase db push`) to create an empty table.
--- Do not seed here: use Dashboard → Sync from GitHub, Table Editor, or optional
--- `supabase/optional_seed_portfolio_projects.sql` when you want sample rows.
+-- In Supabase: SQL Editor → New query → paste this entire file → Run.
+-- After this runs, the API should see the table (reload notify at bottom).
 
 create table if not exists public.portfolio_projects (
   id uuid primary key default gen_random_uuid(),
@@ -29,7 +28,11 @@ create index if not exists idx_portfolio_projects_displayed
 
 alter table public.portfolio_projects enable row level security;
 
--- Visitors only see rows you publish; signed-in users see everything (manage drafts).
+drop policy if exists "portfolio_projects_select" on public.portfolio_projects;
+drop policy if exists "portfolio_projects_insert" on public.portfolio_projects;
+drop policy if exists "portfolio_projects_update" on public.portfolio_projects;
+drop policy if exists "portfolio_projects_delete" on public.portfolio_projects;
+
 create policy "portfolio_projects_select"
   on public.portfolio_projects for select
   using (
@@ -65,3 +68,6 @@ create trigger portfolio_projects_updated_at
   before update on public.portfolio_projects
   for each row
   execute procedure public.portfolio_projects_set_updated_at();
+
+-- Refresh PostgREST schema cache so the JS client can see the new table immediately.
+notify pgrst, 'reload schema';

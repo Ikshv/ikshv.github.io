@@ -3,6 +3,17 @@ import { usePortfolioProjects } from '../hooks/usePortfolioProjects';
 import { syncGitHubPortfolioProjects } from '../lib/githubProjectSync';
 import { supabase } from '../lib/supabaseClient';
 
+function isMissingPortfolioTable(msg) {
+  if (!msg || typeof msg !== 'string') return false;
+  const m = msg.toLowerCase();
+  return (
+    m.includes('portfolio_projects') &&
+    (m.includes('schema cache') ||
+      m.includes('does not exist') ||
+      m.includes('could not find'))
+  );
+}
+
 function DashboardProjectAdmin() {
   const { rows, loading, error, refetch } = usePortfolioProjects({
     includeDrafts: true,
@@ -28,6 +39,8 @@ function DashboardProjectAdmin() {
     }
     refetch();
   }
+
+  const tableError = [syncErr, error].find((m) => isMissingPortfolioTable(m));
 
   const handleSyncGitHub = async () => {
     setSyncing(true);
@@ -67,7 +80,49 @@ function DashboardProjectAdmin() {
       </button>
 
       {syncMsg && <p className="text-emerald-200 text-sm mb-2">{syncMsg}</p>}
-      {(syncErr || error) && (
+
+      {tableError && (
+        <div
+          className="mb-4 rounded-lg border border-amber-500/50 bg-amber-950/40 p-4 text-sm text-amber-100"
+          role="alert"
+        >
+          <p className="font-semibold text-amber-50 mb-2">Create the table in Supabase first</p>
+          <p className="mb-2 text-amber-100/90">
+            The app is talking to Supabase, but <code className="text-white">public.portfolio_projects</code>{' '}
+            is not there yet (or the API cache is stale).
+          </p>
+          <ol className="list-decimal list-inside space-y-1 text-amber-100/90 mb-3">
+            <li>
+              Open your project at{' '}
+              <a
+                href="https://supabase.com/dashboard"
+                className="text-blue-300 underline"
+                target="_blank"
+                rel="noreferrer"
+              >
+                supabase.com/dashboard
+              </a>
+              — use the <strong>same</strong> project as <code className="text-white">REACT_APP_SUPABASE_URL</code>.
+            </li>
+            <li>
+              <strong>SQL Editor</strong> → New query → paste the full file{' '}
+              <code className="text-white">supabase/migrations/20260325120000_portfolio_projects.sql</code> from
+              this repo → <strong>Run</strong>.
+            </li>
+            <li>
+              If the error persists, run once:{' '}
+              <code className="block mt-1 bg-black/40 p-2 rounded text-white text-xs">
+                NOTIFY pgrst, &apos;reload schema&apos;;
+              </code>
+            </li>
+          </ol>
+          <p className="text-xs text-amber-200/70">
+            Raw message: {syncErr || error}
+          </p>
+        </div>
+      )}
+
+      {(syncErr || error) && !tableError && (
         <p className="text-red-300 text-sm mb-2" role="alert">
           {syncErr || error}
         </p>
@@ -75,11 +130,11 @@ function DashboardProjectAdmin() {
 
       {loading ? (
         <p className="text-gray-400 text-sm">Loading projects…</p>
-      ) : rows.length === 0 ? (
+      ) : tableError ? null : rows.length === 0 ? (
         <p className="text-gray-400 text-sm">
-          No rows yet. Run the portfolio table migration in Supabase (empty table), configure GitHub
-          username if needed, then use <strong>Sync from GitHub</strong> for a repo with{' '}
-          <code className="text-gray-300">project.json</code>.
+          No rows yet. After the table exists, use <strong>Sync from GitHub</strong> for a repo with{' '}
+          <code className="text-gray-300">project.json</code> (set <code className="text-gray-300">REACT_APP_GITHUB_USER</code>{' '}
+          if your username is not <code className="text-gray-300">ikshv</code>).
         </p>
       ) : (
         <ul className="space-y-3 text-sm">

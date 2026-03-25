@@ -11,7 +11,7 @@ Auth uses Supabase. New users are not registered from the site; add accounts in 
 
 Never put the **service_role** key in the frontend.
 
-**Portfolio projects:** In Supabase SQL Editor, run **only** `supabase/migrations/20260325120000_portfolio_projects.sql` to create the empty `portfolio_projects` table (no sample data). Then set `REACT_APP_GITHUB_USER` if needed, sign in, and use **Dashboard → Sync from GitHub** to pull a test repo that has `project.json`; toggle **On site** / **Featured** there. Optional legacy sample rows: `supabase/optional_seed_portfolio_projects.sql` (run manually when you want them).
+**Portfolio projects:** In the Supabase **SQL Editor** for the **same project** as your `REACT_APP_SUPABASE_URL`, open `supabase/migrations/20260325120000_portfolio_projects.sql` from this repo, paste the full file, and **Run**. That creates `public.portfolio_projects` and sends `NOTIFY pgrst, 'reload schema'` so the API sees the table. If you still see “schema cache”, run `NOTIFY pgrst, 'reload schema';` once manually. Then set `REACT_APP_GITHUB_USER` if needed, sign in, and use **Dashboard → Sync from GitHub** for a repo with `project.json`. Optional sample rows: `supabase/optional_seed_portfolio_projects.sql` (run manually only if you want them).
 
 **Production:** Set the same two variables in Vercel (or your host) and as GitHub Actions secrets `REACT_APP_SUPABASE_URL` and `REACT_APP_SUPABASE_ANON_KEY` so the GitHub Pages deploy workflow can build with auth enabled.
 
