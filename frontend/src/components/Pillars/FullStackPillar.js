@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaReact, FaDatabase } from 'react-icons/fa';
+import { FaLaptopCode, FaReact, FaDatabase } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const FullStackPillar = () => {
@@ -24,7 +24,10 @@ const FullStackPillar = () => {
 
   return (
     <section className="py-10 px-6 text-white max-w-5xl mx-auto">
-      <h2 className="text-3xl font-bold mb-6">💻 Full Stack Engineering</h2>
+      <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
+        <FaLaptopCode className="text-green-300 shrink-0" aria-hidden />
+        <span>Full Stack Engineering</span>
+      </h2>
 
       <div className="grid gap-6 md:grid-cols-2">
         {projects.map((project, index) => (

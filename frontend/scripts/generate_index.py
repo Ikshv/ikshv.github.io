@@ -16,7 +16,7 @@ def get_repos():
     repos = response.json()
 
     if not isinstance(repos, list):
-        print("❌ GitHub API error:", repos.get("message", "Unknown error"))
+        print("GitHub API error:", repos.get("message", "Unknown error"))
         return
 
     index = []
@@ -27,13 +27,13 @@ def get_repos():
             data = get_project_data(name)
             if data and data.get("live", False):
                 index.append(data)
-                print(f"✅ {name} included")
+                print(f"OK {name} included")
         except Exception as e:
-            print(f"⚠️ Skipped {name}: {e}")
+            print(f"Skipped {name}: {e}")
 
     with open("frontend/src/data/projectIndex.json", "w") as f:
         json.dump(index, f, indent=2)
-        print(f"\n📦 {len(index)} live projects written to projectIndex.json")
+        print(f"\n{len(index)} live projects written to projectIndex.json")
 
 def get_project_data(repo_name):
     meta_url = f"https://api.github.com/repos/{OWNER}/{repo_name}"

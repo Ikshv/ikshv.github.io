@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaGithub, FaGlobe } from 'react-icons/fa';
 import { usePortfolioProjects } from '../hooks/usePortfolioProjects';
 
 function Repos() {
@@ -34,18 +35,20 @@ function Repos() {
                     href={project.homepage}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-green-300 hover:text-green-400 underline"
+                    className="inline-flex items-center gap-1.5 text-green-300 hover:text-green-400 underline"
                   >
-                    🌐 Live Demo
+                    <FaGlobe aria-hidden />
+                    Live demo
                   </a>
                 )}
                 <a
                   href={project.github_url}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-blue-300 hover:text-blue-400 underline"
+                  className="inline-flex items-center gap-1.5 text-blue-300 hover:text-blue-400 underline"
                 >
-                  📦 GitHub
+                  <FaGithub aria-hidden />
+                  GitHub
                 </a>
               </div>
             </li>

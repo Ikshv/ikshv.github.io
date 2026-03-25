@@ -27,6 +27,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+`prestart` runs first and writes **`src/siteLastUpdated.json`** (gitignored) from `git log -1` at the repo root; the footer shows **Last updated (repo)** from that timestamp.
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\

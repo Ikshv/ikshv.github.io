@@ -7,7 +7,7 @@
     padding: 2rem;
     margin-bottom: 2rem;
     color: #fff;
-    overflow: visible; /* ✅ ensures projects can expand */
+    overflow: visible;
     position: relative;
   }
   
@@ -48,9 +48,9 @@
     max-height: 0;
     overflow: hidden;
     opacity: 0;
-    padding: 0 1rem; /* ✅ adds padding for the transition */
-    width: 100%;                    /* ✅ ensures it stretches fully */
-    box-sizing: border-box;         /* ✅ includes padding inside width */
+    padding: 0 1rem;
+    width: 100%;
+    box-sizing: border-box;
     transition: max-height 0.5s ease, opacity 0.4s ease, padding 1s ease;
   }
   
@@ -58,7 +58,7 @@
     max-height: 5000px;
     opacity: 1;
     padding-top: 1rem;
-    padding-bottom: 1rem; /* ✅ adds bottom padding when open */
+    padding-bottom: 1rem;
   }
   
   
@@ -66,7 +66,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    overflow: visible; /* ✅ prevents cutoff */
+    overflow: visible;
   }
   
   .project-card {

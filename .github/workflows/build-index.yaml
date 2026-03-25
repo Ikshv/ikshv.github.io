@@ -2,12 +2,12 @@ name: Generate Project Index
 
 on:
   push:
-    branches: [dev]       # ✅ Only triggers on push to dev
-  workflow_dispatch:      # ✅ Optional: lets you trigger manually
-  schedule:              # ✅ Optional: lets you set a cron job
-    - cron: '0 0 * * *'   # ✅ Every day at midnight UTC
-  repository_dispatch: # ✅ Optional: lets you trigger from another workflow
-    types: [project-json-update] # ✅ Only triggers on this event type
+    branches: [dev]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+  repository_dispatch:
+    types: [project-json-update]
 
 jobs:
   build:
@@ -37,8 +37,8 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add frontend/src/data/projectIndex.json
-          git commit -m "🔄 Auto-update project index" || echo "No changes to commit"
+          git commit -m "chore: auto-update project index" || echo "No changes to commit"
           git push
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_API_TOKEN }}   # ✅ Required for push
+          GITHUB_TOKEN: ${{ secrets.GH_API_TOKEN }}
           

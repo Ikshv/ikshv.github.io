@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { FaBars } from 'react-icons/fa';
 import { AuthContext } from '../context/AuthContext';
 import logo from '../assets/logo512.png';
 import Dropdown from './Dropdown';
@@ -13,10 +14,12 @@ function Header({ title, subtitle, toggleSidebar }) {
       <div className="flex items-center justify-between px-6 py-4">
         <div className="flex items-center gap-4">
           <button
+            type="button"
             onClick={toggleSidebar}
             className="text-xl p-2 bg-white/20 rounded-md hover:bg-white/30 transition"
+            aria-label="Open menu"
           >
-            ☰
+            <FaBars className="w-5 h-5" aria-hidden />
           </button>
 
           <img src={logo} alt="Site Logo" className="h-10" />

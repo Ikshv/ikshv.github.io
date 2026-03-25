@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaServer } from 'react-icons/fa';
 import { SiNextdotjs } from 'react-icons/si';
 import { Link } from 'react-router-dom';
 
@@ -25,7 +25,10 @@ const DevOpsPillar = () => {
 
   return (
     <section className="py-10 px-6 text-white max-w-5xl mx-auto">
-      <h2 className="text-3xl font-bold mb-6">🧱 DevOps & System Design</h2>
+      <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
+        <FaServer className="text-blue-300 shrink-0" aria-hidden />
+        <span>DevOps & System Design</span>
+      </h2>
 
       <div className="grid gap-6 md:grid-cols-2">
         {devopsProjects.map((project, index) => (

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import { AuthContext } from '../context/AuthContext';
 
 function SiteSidebar({ isOpen, toggleSidebar }) {
@@ -20,10 +21,21 @@ function SiteSidebar({ isOpen, toggleSidebar }) {
         }`}
       >
         <button
+          type="button"
           onClick={toggleSidebar}
-          className="text-sm px-4 py-2 bg-gray-800 hover:bg-gray-700 w-full text-left"
+          className="text-sm px-4 py-2 bg-gray-800 hover:bg-gray-700 w-full text-left flex items-center gap-2"
         >
-          {isOpen ? '✖ Close Sidebar' : '☰ Open Sidebar'}
+          {isOpen ? (
+            <>
+              <FaTimes className="shrink-0" aria-hidden />
+              Close sidebar
+            </>
+          ) : (
+            <>
+              <FaBars className="shrink-0" aria-hidden />
+              Open sidebar
+            </>
+          )}
         </button>
 
         <nav className="flex flex-col gap-4 mt-4 px-4">
