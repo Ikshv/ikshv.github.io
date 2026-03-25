@@ -15,7 +15,7 @@ Never put the **service_role** key in the frontend.
 
 **Employment (About / Experience):** Run `supabase/migrations/20260325200000_employment_positions.sql`, then optionally `supabase/optional_seed_employment_positions.sql`. The About page **Experience** section reads `employment_positions`; the **Dashboard** shows a table with detail/JSON and **On site** / **sort** toggles.
 
-**Production:** Set the same two variables in Vercel (or your host) and as GitHub Actions secrets `REACT_APP_SUPABASE_URL` and `REACT_APP_SUPABASE_ANON_KEY` so the GitHub Pages deploy workflow can build with auth enabled.
+**Production:** Set the same two variables in Vercel (or your host). For **GitHub Pages** builds, add repository secrets `REACT_APP_SUPABASE_URL` and `REACT_APP_SUPABASE_ANON_KEY` (Settings → Secrets and variables → Actions). Do **not** commit `frontend/.env.production`; copy `frontend/.env.production.example` to `.env.production` locally if you run `npm run build` on your machine.
 
 ## Available Scripts
 

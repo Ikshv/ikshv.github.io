@@ -5,6 +5,7 @@ node_modules/
 .env
 .env.local
 .env.*.local
+frontend/.env.production
 
 # Build outputs
 dist/

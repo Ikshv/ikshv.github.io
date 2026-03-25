@@ -21,10 +21,12 @@ jobs:
         working-directory: frontend
         run: npm install
 
-      # Supabase URL + anon key come from frontend/.env.production (public client config).
-      # Do not inject empty secrets here — unset env would override dotenv and break the build.
+      # Public Supabase client vars (same as browser bundle). Set as repo secrets — never commit .env.production.
       - name: Build the site
         working-directory: frontend
+        env:
+          REACT_APP_SUPABASE_URL: ${{ secrets.REACT_APP_SUPABASE_URL }}
+          REACT_APP_SUPABASE_ANON_KEY: ${{ secrets.REACT_APP_SUPABASE_ANON_KEY }}
         run: npm run build
 
       - name: Deploy to gh-pages
