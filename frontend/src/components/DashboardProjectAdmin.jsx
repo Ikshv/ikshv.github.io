@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { usePortfolioProjects } from '../hooks/usePortfolioProjects';
 import { syncGitHubPortfolioProjects } from '../lib/githubProjectSync';
 import { supabase } from '../lib/supabaseClient';
+
+const PROJECTS_PAGE_SIZE = 12;
 
 function isMissingPortfolioTable(msg) {
   if (!msg || typeof msg !== 'string') return false;
@@ -24,6 +27,18 @@ function DashboardProjectAdmin() {
   const [syncErr, setSyncErr] = useState('');
   const [syncing, setSyncing] = useState(false);
   const [busyId, setBusyId] = useState(null);
+  const [page, setPage] = useState(0);
+
+  const totalPages = Math.max(1, Math.ceil(rows.length / PROJECTS_PAGE_SIZE));
+  const pageSlice = useMemo(() => {
+    const start = page * PROJECTS_PAGE_SIZE;
+    return rows.slice(start, start + PROJECTS_PAGE_SIZE);
+  }, [rows, page]);
+
+  useEffect(() => {
+    const maxPage = Math.max(0, Math.ceil(rows.length / PROJECTS_PAGE_SIZE) - 1);
+    setPage((p) => Math.min(p, maxPage));
+  }, [rows.length]);
 
   async function updateRow(id, patch) {
     setBusyId(id);
@@ -67,8 +82,9 @@ function DashboardProjectAdmin() {
         <div>
           <h2 className="text-lg font-semibold text-white">GitHub projects</h2>
           <p className="text-gray-400 text-xs mt-1 leading-relaxed">
-            Sync loads all repos. Turn on <strong className="text-gray-300">On site</strong> for /projects;
-            <strong className="text-gray-300"> Featured</strong> for the home row (lower sort first).
+            Sync loads all repos. This list shows <strong className="text-gray-300">12 per page</strong> with
+            Previous / Next below. Turn on <strong className="text-gray-300">On site</strong> for /projects;{' '}
+            <strong className="text-gray-300">Featured</strong> for the home row (lower sort first).
             Optional root <code className="text-gray-300">project.json</code> enriches fields.
           </p>
         </div>
@@ -132,67 +148,103 @@ function DashboardProjectAdmin() {
         )}
       </div>
 
-      <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 py-3">
-        {loading ? (
-          <p className="text-gray-400 text-sm">Loading projects…</p>
-        ) : tableError ? null : rows.length === 0 ? (
-          <p className="text-gray-400 text-sm">
-            No rows yet. Use <strong>Sync from GitHub</strong> to import all your repos (set{' '}
-            <code className="text-gray-300">REACT_APP_GITHUB_USER</code> if your login is not{' '}
-            <code className="text-gray-300">ikshv</code>), then enable <strong>On site</strong> for each
-            project you want public.
-          </p>
-        ) : (
-          <ul className="space-y-3 text-sm pb-2">
-            {rows.map((p) => (
-              <li
-                key={p.id}
-                className="bg-black/30 border border-white/15 rounded-lg p-3 grid gap-2 sm:grid-cols-[1fr_auto] sm:items-center"
+      <div className="flex flex-col flex-1 min-h-0">
+        <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 py-3">
+          {loading ? (
+            <p className="text-gray-400 text-sm">Loading projects…</p>
+          ) : tableError ? null : rows.length === 0 ? (
+            <p className="text-gray-400 text-sm">
+              No rows yet. Use <strong>Sync from GitHub</strong> to import all your repos (set{' '}
+              <code className="text-gray-300">REACT_APP_GITHUB_USER</code> if your login is not{' '}
+              <code className="text-gray-300">ikshv</code>), then enable <strong>On site</strong> for each
+              project you want public.
+            </p>
+          ) : (
+            <ul className="space-y-3 text-sm pb-2">
+              {pageSlice.map((p) => (
+                <li
+                  key={p.id}
+                  className="bg-black/30 border border-white/15 rounded-lg p-3 grid gap-2 sm:grid-cols-[1fr_auto] sm:items-center"
+                >
+                  <div className="min-w-0">
+                    <div className="font-medium text-white truncate">{p.title}</div>
+                    <div className="text-gray-500 text-xs truncate">{p.github_repo}</div>
+                  </div>
+                  <div className="flex flex-wrap gap-3 items-center sm:justify-end">
+                    <label className="flex items-center gap-1.5 cursor-pointer text-gray-200 text-xs">
+                      <input
+                        type="checkbox"
+                        checked={p.displayed_on_site}
+                        disabled={busyId === p.id}
+                        onChange={(e) =>
+                          updateRow(p.id, { displayed_on_site: e.target.checked })
+                        }
+                      />
+                      On site
+                    </label>
+                    <label className="flex items-center gap-1.5 cursor-pointer text-gray-200 text-xs">
+                      <input
+                        type="checkbox"
+                        checked={p.is_highlight}
+                        disabled={busyId === p.id}
+                        onChange={(e) => updateRow(p.id, { is_highlight: e.target.checked })}
+                      />
+                      Featured
+                    </label>
+                    <label className="flex items-center gap-1.5 text-gray-200 text-xs">
+                      <span className="text-gray-400">Order</span>
+                      <input
+                        type="number"
+                        className="w-14 rounded bg-black/40 border border-white/20 px-1.5 py-1 text-white text-xs"
+                        defaultValue={p.highlight_sort}
+                        key={`${p.id}-${p.highlight_sort}`}
+                        disabled={busyId === p.id}
+                        onBlur={(e) => {
+                          const v = parseInt(e.target.value, 10);
+                          if (Number.isNaN(v) || v === p.highlight_sort) return;
+                          updateRow(p.id, { highlight_sort: v });
+                        }}
+                      />
+                    </label>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {!loading && !tableError && rows.length > PROJECTS_PAGE_SIZE && (
+          <div className="shrink-0 flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 border-t border-white/10 bg-black/30 text-xs text-gray-300">
+            <span>
+              {page * PROJECTS_PAGE_SIZE + 1}–
+              {Math.min((page + 1) * PROJECTS_PAGE_SIZE, rows.length)} of {rows.length}
+            </span>
+            <div className="flex items-center gap-1">
+              <button
+                type="button"
+                disabled={page <= 0}
+                onClick={() => setPage((p) => Math.max(0, p - 1))}
+                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md bg-white/10 hover:bg-white/20 disabled:opacity-40 disabled:pointer-events-none text-white"
+                aria-label="Previous page"
               >
-                <div className="min-w-0">
-                  <div className="font-medium text-white truncate">{p.title}</div>
-                  <div className="text-gray-500 text-xs truncate">{p.github_repo}</div>
-                </div>
-                <div className="flex flex-wrap gap-3 items-center sm:justify-end">
-                  <label className="flex items-center gap-1.5 cursor-pointer text-gray-200 text-xs">
-                    <input
-                      type="checkbox"
-                      checked={p.displayed_on_site}
-                      disabled={busyId === p.id}
-                      onChange={(e) =>
-                        updateRow(p.id, { displayed_on_site: e.target.checked })
-                      }
-                    />
-                    On site
-                  </label>
-                  <label className="flex items-center gap-1.5 cursor-pointer text-gray-200 text-xs">
-                    <input
-                      type="checkbox"
-                      checked={p.is_highlight}
-                      disabled={busyId === p.id}
-                      onChange={(e) => updateRow(p.id, { is_highlight: e.target.checked })}
-                    />
-                    Featured
-                  </label>
-                  <label className="flex items-center gap-1.5 text-gray-200 text-xs">
-                    <span className="text-gray-400">Order</span>
-                    <input
-                      type="number"
-                      className="w-14 rounded bg-black/40 border border-white/20 px-1.5 py-1 text-white text-xs"
-                      defaultValue={p.highlight_sort}
-                      key={`${p.id}-${p.highlight_sort}`}
-                      disabled={busyId === p.id}
-                      onBlur={(e) => {
-                        const v = parseInt(e.target.value, 10);
-                        if (Number.isNaN(v) || v === p.highlight_sort) return;
-                        updateRow(p.id, { highlight_sort: v });
-                      }}
-                    />
-                  </label>
-                </div>
-              </li>
-            ))}
-          </ul>
+                <FaChevronLeft className="w-3 h-3" aria-hidden />
+                Previous
+              </button>
+              <span className="text-gray-500 px-1 tabular-nums">
+                {page + 1} / {totalPages}
+              </span>
+              <button
+                type="button"
+                disabled={page >= totalPages - 1}
+                onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
+                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md bg-white/10 hover:bg-white/20 disabled:opacity-40 disabled:pointer-events-none text-white"
+                aria-label="Next page"
+              >
+                Next
+                <FaChevronRight className="w-3 h-3" aria-hidden />
+              </button>
+            </div>
+          </div>
         )}
       </div>
     </div>
