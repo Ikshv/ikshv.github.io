@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { supabase } from '../lib/supabaseClient';
+import { isSupabaseConfigured, supabase } from '../lib/supabaseClient';
 import { AuthFormLayout } from '../components/AuthFormLayout';
 
 function Login() {
@@ -15,11 +15,9 @@ function Login() {
     event.preventDefault();
     setError('');
 
-    const url = process.env.REACT_APP_SUPABASE_URL;
-    const key = process.env.REACT_APP_SUPABASE_ANON_KEY;
-    if (!url || !key) {
+    if (!isSupabaseConfigured || !supabase) {
       setError(
-        'Supabase is not configured. Add REACT_APP_SUPABASE_URL and REACT_APP_SUPABASE_ANON_KEY (see frontend/.env.example).'
+        'Supabase is not configured. Add REACT_APP_SUPABASE_URL and REACT_APP_SUPABASE_ANON_KEY for this environment (see frontend/.env.example), then redeploy.'
       );
       return;
     }

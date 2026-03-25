@@ -41,6 +41,10 @@ function DashboardProjectAdmin() {
   }, [rows.length]);
 
   async function updateRow(id, patch) {
+    if (!supabase) {
+      setSyncErr('Supabase is not configured for this build.');
+      return;
+    }
     setBusyId(id);
     setSyncErr('');
     const { error: uErr } = await supabase

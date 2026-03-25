@@ -67,6 +67,10 @@ async function tryFetchProjectJson(repo) {
  * New repos default to hidden on the public site until you enable "On site".
  */
 export async function syncGitHubPortfolioProjects(ownerLogin = DEFAULT_OWNER) {
+  if (!supabase) {
+    throw new Error('Supabase is not configured (missing REACT_APP_* at build time).');
+  }
+
   const repos = await fetchAllUserRepos(ownerLogin);
 
   const { data: existingRows, error: existingErr } = await supabase

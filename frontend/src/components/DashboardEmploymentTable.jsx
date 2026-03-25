@@ -95,6 +95,10 @@ function DashboardEmploymentTable() {
   }, []);
 
   async function updateRow(id, patch) {
+    if (!supabase) {
+      setUpdateErr('Supabase is not configured for this build.');
+      return false;
+    }
     setBusyId(id);
     setUpdateErr('');
     const { error: uErr } = await supabase

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { supabase } from '../lib/supabaseClient';
+import { isSupabaseConfigured, supabase } from '../lib/supabaseClient';
 
 /**
  * @param {{ includeDrafts?: boolean, highlightsOnly?: boolean, limit?: number, orderBy?: 'published' | 'github_repo' }} [options]
@@ -19,6 +19,15 @@ export function usePortfolioProjects(options = {}) {
   const load = useCallback(async () => {
     setLoading(true);
     setError(null);
+
+    if (!isSupabaseConfigured || !supabase) {
+      setError(
+        'Supabase is not configured for this build (set REACT_APP_SUPABASE_URL and REACT_APP_SUPABASE_ANON_KEY when building, then redeploy).'
+      );
+      setRows([]);
+      setLoading(false);
+      return;
+    }
 
     let q = supabase.from('portfolio_projects').select('*');
 

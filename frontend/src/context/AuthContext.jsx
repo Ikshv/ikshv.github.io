@@ -21,6 +21,12 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!supabase) {
+      setUser(null);
+      setLoading(false);
+      return;
+    }
+
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(mapUser(session?.user ?? null));
       setLoading(false);
@@ -36,7 +42,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const logout = useCallback(async () => {
-    await supabase.auth.signOut();
+    if (supabase) await supabase.auth.signOut();
     setUser(null);
   }, []);
 
