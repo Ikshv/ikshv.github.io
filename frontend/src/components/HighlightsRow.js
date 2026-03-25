@@ -26,8 +26,8 @@ function HighlightsRow() {
         )}
         {!loading && !error && highlights.length === 0 && (
           <p className="text-center text-gray-400">
-            No featured projects yet. Sign in → Dashboard → mark projects as Featured, or run GitHub
-            sync.
+            No featured projects yet. Dashboard → sync repos → turn on <strong>On site</strong> and{' '}
+            <strong>Featured</strong> for up to three projects.
           </p>
         )}
 

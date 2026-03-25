@@ -18,6 +18,7 @@ function DashboardProjectAdmin() {
   const { rows, loading, error, refetch } = usePortfolioProjects({
     includeDrafts: true,
     highlightsOnly: false,
+    orderBy: 'github_repo',
   });
   const [syncMsg, setSyncMsg] = useState('');
   const [syncErr, setSyncErr] = useState('');
@@ -50,7 +51,7 @@ function DashboardProjectAdmin() {
       const r = await syncGitHubPortfolioProjects();
       setSyncMsg(
         r.message ||
-          `Synced ${r.upserted} repo(s) with project.json. Highlight settings were kept.`
+          `Synced ${r.upserted} repo(s). Visibility and featured toggles were kept where rows already existed.`
       );
       await refetch();
     } catch (e) {
@@ -64,10 +65,12 @@ function DashboardProjectAdmin() {
     <div className="border-t border-white/10 pt-6 mt-6">
       <h2 className="text-xl font-semibold mb-2">Projects (Supabase)</h2>
       <p className="text-gray-300 text-sm mb-4">
-        Home highlights and <span className="text-white">/projects</span> read from the same table.
-        Sync pulls repos that contain a root <code className="text-gray-200">project.json</code> (same
-        idea as your GitHub Action). Toggle <strong>Featured</strong> to show a project in the home
-        &quot;Featured Projects&quot; row (up to three with lowest sort order).
+        <strong>Sync from GitHub</strong> imports <em>every</em> repo on your account (paginated).
+        Names and descriptions come from GitHub; if a repo has a root{' '}
+        <code className="text-gray-200">project.json</code>, that can override title, blurb, tags, and
+        demo link. New repos start with <strong>On site</strong> off—turn it on for anything you want
+        on <span className="text-white">/projects</span> or the home grid. <strong>Featured</strong>{' '}
+        picks up to three for the home row (lowest sort order first).
       </p>
 
       <button
@@ -132,9 +135,10 @@ function DashboardProjectAdmin() {
         <p className="text-gray-400 text-sm">Loading projects…</p>
       ) : tableError ? null : rows.length === 0 ? (
         <p className="text-gray-400 text-sm">
-          No rows yet. After the table exists, use <strong>Sync from GitHub</strong> for a repo with{' '}
-          <code className="text-gray-300">project.json</code> (set <code className="text-gray-300">REACT_APP_GITHUB_USER</code>{' '}
-          if your username is not <code className="text-gray-300">ikshv</code>).
+          No rows yet. Use <strong>Sync from GitHub</strong> to import all your repos (set{' '}
+          <code className="text-gray-300">REACT_APP_GITHUB_USER</code> if your login is not{' '}
+          <code className="text-gray-300">ikshv</code>), then enable <strong>On site</strong> for each
+          project you want public.
         </p>
       ) : (
         <ul className="space-y-3 text-sm">
