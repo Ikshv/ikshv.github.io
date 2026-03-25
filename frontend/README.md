@@ -11,6 +11,8 @@ Auth uses Supabase. New users are not registered from the site; add accounts in 
 
 Never put the **service_role** key in the frontend.
 
+**Portfolio projects:** Run the SQL files in the repo root `supabase/migrations/` in the Supabase SQL editor (table `portfolio_projects`, optional seed). Signed-in users can use **Dashboard → Sync from GitHub** to upsert rows from repos that contain a root `project.json`, and toggle **Featured** / **On site** without redeploying.
+
 **Production:** Set the same two variables in Vercel (or your host) and as GitHub Actions secrets `REACT_APP_SUPABASE_URL` and `REACT_APP_SUPABASE_ANON_KEY` so the GitHub Pages deploy workflow can build with auth enabled.
 
 ## Available Scripts

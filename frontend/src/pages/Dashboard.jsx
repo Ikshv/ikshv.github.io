@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import DashboardProjectAdmin from '../components/DashboardProjectAdmin';
 
 const Dashboard = () => {
   const { user, logout } = useContext(AuthContext);
@@ -33,6 +34,8 @@ const Dashboard = () => {
         ) : (
           <p className="text-gray-300">You do not have a recognized role.</p>
         )}
+
+        <DashboardProjectAdmin />
 
         <div className="flex flex-wrap gap-3 mt-8">
           <Link
