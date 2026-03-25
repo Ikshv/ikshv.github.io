@@ -151,48 +151,52 @@ function DashboardEmploymentTable() {
   }
 
   return (
-    <div className="border-t border-white/10 pt-6 mt-6">
-      <h2 className="text-xl font-semibold mb-2">Employment (About / Experience)</h2>
-      <p className="text-gray-300 text-sm mb-4">
-        Expand a row to edit fields line-by-line and manage nested projects. Uncheck{' '}
-        <strong>Show project on About</strong> to hide a project card while keeping the role visible.
-        Use <strong>Save</strong> to write to Supabase.
-      </p>
-
-      {tableError && (
-        <div
-          className="mb-4 rounded-lg border border-amber-500/50 bg-amber-950/40 p-4 text-sm text-amber-100"
-          role="alert"
-        >
-          <p className="font-semibold text-amber-50 mb-2">Create the employment table in Supabase</p>
-          <p className="mb-2 text-amber-100/90">
-            Run <code className="text-white">supabase/migrations/20260325200000_employment_positions.sql</code>{' '}
-            in the SQL Editor, then optionally{' '}
-            <code className="text-white">supabase/optional_seed_employment_positions.sql</code> for sample
-            rows.
+    <div className="flex flex-col h-full min-h-[280px] max-h-[70vh] lg:max-h-none rounded-xl border border-white/20 bg-black/25 backdrop-blur-md shadow-lg overflow-hidden">
+      <div className="shrink-0 px-4 py-3 border-b border-white/10 space-y-2">
+        <div>
+          <h2 className="text-lg font-semibold text-white">Employment</h2>
+          <p className="text-gray-400 text-xs mt-1 leading-relaxed">
+            About → Experience. <strong className="text-gray-300">Edit detail</strong> per role; toggle{' '}
+            <strong className="text-gray-300">Show project on About</strong> inside the editor.{' '}
+            <strong className="text-gray-300">Save</strong> writes to Supabase.
           </p>
-          <p className="text-xs text-amber-200/70">Message: {error || updateErr}</p>
         </div>
-      )}
 
-      {loading && <p className="text-gray-400 text-sm">Loading employment rows…</p>}
+        {tableError && (
+          <div
+            className="rounded-lg border border-amber-500/50 bg-amber-950/40 p-3 text-xs text-amber-100 max-h-36 overflow-y-auto"
+            role="alert"
+          >
+            <p className="font-semibold text-amber-50 mb-1">Create the employment table in Supabase</p>
+            <p className="mb-1 text-amber-100/90 text-[11px]">
+              Run <code className="text-white">supabase/migrations/20260325200000_employment_positions.sql</code>
+              , then optionally{' '}
+              <code className="text-white">supabase/optional_seed_employment_positions.sql</code>.
+            </p>
+            <p className="text-[11px] text-amber-200/70">Message: {error || updateErr}</p>
+          </div>
+        )}
 
-      {!loading && !tableError && error && (
-        <p className="text-red-300 text-sm mb-2" role="alert">
-          {error}
-        </p>
-      )}
+        {!loading && !tableError && error && (
+          <p className="text-red-300 text-xs" role="alert">
+            {error}
+          </p>
+        )}
 
-      {!loading && !tableError && rows.length === 0 && (
-        <p className="text-gray-400 text-sm">
-          No rows yet. Run the migration and optional seed, or insert positions in Supabase.
-        </p>
-      )}
+        {!loading && !tableError && rows.length === 0 && (
+          <p className="text-gray-400 text-xs">
+            No rows yet. Run the migration and optional seed, or insert positions in Supabase.
+          </p>
+        )}
+      </div>
 
-      {!loading && !tableError && rows.length > 0 && (
-        <div className="overflow-x-auto rounded-lg border border-white/15">
-          <table className="w-full text-left text-sm text-gray-200">
-            <thead className="bg-black/30 text-xs uppercase text-gray-400">
+      <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 py-3">
+        {loading && <p className="text-gray-400 text-sm">Loading employment rows…</p>}
+
+        {!loading && !tableError && rows.length > 0 && (
+          <div className="overflow-x-auto rounded-lg border border-white/15">
+            <table className="w-full text-left text-sm text-gray-200">
+              <thead className="sticky top-0 z-[1] bg-neutral-950/95 backdrop-blur-sm text-xs uppercase text-gray-400 border-b border-white/10">
               <tr>
                 <th className="px-3 py-2">Company</th>
                 <th className="px-3 py-2">Title</th>
@@ -255,7 +259,7 @@ function DashboardEmploymentTable() {
                   {expandedId === row.id && draft && draft.rowId === row.id && (
                     <tr className="border-t border-white/5 bg-black/25">
                       <td colSpan={7} className="px-3 py-4 text-xs align-top">
-                        <div className="max-w-3xl space-y-6">
+                        <div className="max-w-full space-y-6">
                           <div>
                             <h3 className="text-sm font-semibold text-white mb-2">Role (About page)</h3>
                             <div className="rounded-md border border-white/10 bg-black/20 p-3 space-y-0">
@@ -420,7 +424,8 @@ function DashboardEmploymentTable() {
             </tbody>
           </table>
         </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

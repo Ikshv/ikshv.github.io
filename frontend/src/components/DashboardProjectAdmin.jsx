@@ -62,39 +62,39 @@ function DashboardProjectAdmin() {
   };
 
   return (
-    <div className="border-t border-white/10 pt-6 mt-6">
-      <h2 className="text-xl font-semibold mb-2">Projects (Supabase)</h2>
-      <p className="text-gray-300 text-sm mb-4">
-        <strong>Sync from GitHub</strong> imports <em>every</em> repo on your account (paginated).
-        Names and descriptions come from GitHub; if a repo has a root{' '}
-        <code className="text-gray-200">project.json</code>, that can override title, blurb, tags, and
-        demo link. New repos start with <strong>On site</strong> off—turn it on for anything you want
-        on <span className="text-white">/projects</span> or the home grid. <strong>Featured</strong>{' '}
-        picks up to three for the home row (lowest sort order first).
-      </p>
+    <div className="flex flex-col h-full min-h-[280px] max-h-[70vh] lg:max-h-none rounded-xl border border-white/20 bg-black/25 backdrop-blur-md shadow-lg overflow-hidden">
+      <div className="shrink-0 px-4 py-3 border-b border-white/10 space-y-3">
+        <div>
+          <h2 className="text-lg font-semibold text-white">GitHub projects</h2>
+          <p className="text-gray-400 text-xs mt-1 leading-relaxed">
+            Sync loads all repos. Turn on <strong className="text-gray-300">On site</strong> for /projects;
+            <strong className="text-gray-300"> Featured</strong> for the home row (lower sort first).
+            Optional root <code className="text-gray-300">project.json</code> enriches fields.
+          </p>
+        </div>
 
-      <button
-        type="button"
-        disabled={syncing}
-        onClick={handleSyncGitHub}
-        className="mb-4 px-4 py-2 rounded-md bg-emerald-700 hover:bg-emerald-600 disabled:opacity-50 text-sm font-medium transition"
-      >
-        {syncing ? 'Syncing from GitHub…' : 'Sync from GitHub'}
-      </button>
-
-      {syncMsg && <p className="text-emerald-200 text-sm mb-2">{syncMsg}</p>}
-
-      {tableError && (
-        <div
-          className="mb-4 rounded-lg border border-amber-500/50 bg-amber-950/40 p-4 text-sm text-amber-100"
-          role="alert"
+        <button
+          type="button"
+          disabled={syncing}
+          onClick={handleSyncGitHub}
+          className="w-full sm:w-auto px-4 py-2 rounded-md bg-emerald-700 hover:bg-emerald-600 disabled:opacity-50 text-sm font-medium transition"
         >
-          <p className="font-semibold text-amber-50 mb-2">Create the table in Supabase first</p>
-          <p className="mb-2 text-amber-100/90">
+          {syncing ? 'Syncing from GitHub…' : 'Sync from GitHub'}
+        </button>
+
+        {syncMsg && <p className="text-emerald-200 text-xs">{syncMsg}</p>}
+
+        {tableError && (
+          <div
+            className="rounded-lg border border-amber-500/50 bg-amber-950/40 p-3 text-xs text-amber-100 max-h-40 overflow-y-auto"
+            role="alert"
+          >
+          <p className="font-semibold text-amber-50 mb-1">Create the table in Supabase first</p>
+          <p className="mb-2 text-amber-100/90 text-[11px]">
             The app is talking to Supabase, but <code className="text-white">public.portfolio_projects</code>{' '}
             is not there yet (or the API cache is stale).
           </p>
-          <ol className="list-decimal list-inside space-y-1 text-amber-100/90 mb-3">
+          <ol className="list-decimal list-inside space-y-1 text-amber-100/90 mb-2 text-[11px]">
             <li>
               Open your project at{' '}
               <a
@@ -122,76 +122,79 @@ function DashboardProjectAdmin() {
           <p className="text-xs text-amber-200/70">
             Raw message: {syncErr || error}
           </p>
-        </div>
-      )}
+          </div>
+        )}
 
-      {(syncErr || error) && !tableError && (
-        <p className="text-red-300 text-sm mb-2" role="alert">
-          {syncErr || error}
-        </p>
-      )}
+        {(syncErr || error) && !tableError && (
+          <p className="text-red-300 text-xs" role="alert">
+            {syncErr || error}
+          </p>
+        )}
+      </div>
 
-      {loading ? (
-        <p className="text-gray-400 text-sm">Loading projects…</p>
-      ) : tableError ? null : rows.length === 0 ? (
-        <p className="text-gray-400 text-sm">
-          No rows yet. Use <strong>Sync from GitHub</strong> to import all your repos (set{' '}
-          <code className="text-gray-300">REACT_APP_GITHUB_USER</code> if your login is not{' '}
-          <code className="text-gray-300">ikshv</code>), then enable <strong>On site</strong> for each
-          project you want public.
-        </p>
-      ) : (
-        <ul className="space-y-3 text-sm">
-          {rows.map((p) => (
-            <li
-              key={p.id}
-              className="bg-black/20 border border-white/15 rounded-lg p-3 grid gap-2 sm:grid-cols-[1fr_auto] sm:items-center"
-            >
-              <div>
-                <div className="font-medium text-white">{p.title}</div>
-                <div className="text-gray-500 text-xs truncate">{p.github_repo}</div>
-              </div>
-              <div className="flex flex-wrap gap-3 items-center sm:justify-end">
-                <label className="flex items-center gap-1.5 cursor-pointer text-gray-200">
-                  <input
-                    type="checkbox"
-                    checked={p.displayed_on_site}
-                    disabled={busyId === p.id}
-                    onChange={(e) =>
-                      updateRow(p.id, { displayed_on_site: e.target.checked })
-                    }
-                  />
-                  On site
-                </label>
-                <label className="flex items-center gap-1.5 cursor-pointer text-gray-200">
-                  <input
-                    type="checkbox"
-                    checked={p.is_highlight}
-                    disabled={busyId === p.id}
-                    onChange={(e) => updateRow(p.id, { is_highlight: e.target.checked })}
-                  />
-                  Featured
-                </label>
-                <label className="flex items-center gap-1.5 text-gray-200">
-                  <span className="text-xs text-gray-400">Order</span>
-                  <input
-                    type="number"
-                    className="w-16 rounded bg-black/40 border border-white/20 px-2 py-1 text-white"
-                    defaultValue={p.highlight_sort}
-                    key={`${p.id}-${p.highlight_sort}`}
-                    disabled={busyId === p.id}
-                    onBlur={(e) => {
-                      const v = parseInt(e.target.value, 10);
-                      if (Number.isNaN(v) || v === p.highlight_sort) return;
-                      updateRow(p.id, { highlight_sort: v });
-                    }}
-                  />
-                </label>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
+      <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 py-3">
+        {loading ? (
+          <p className="text-gray-400 text-sm">Loading projects…</p>
+        ) : tableError ? null : rows.length === 0 ? (
+          <p className="text-gray-400 text-sm">
+            No rows yet. Use <strong>Sync from GitHub</strong> to import all your repos (set{' '}
+            <code className="text-gray-300">REACT_APP_GITHUB_USER</code> if your login is not{' '}
+            <code className="text-gray-300">ikshv</code>), then enable <strong>On site</strong> for each
+            project you want public.
+          </p>
+        ) : (
+          <ul className="space-y-3 text-sm pb-2">
+            {rows.map((p) => (
+              <li
+                key={p.id}
+                className="bg-black/30 border border-white/15 rounded-lg p-3 grid gap-2 sm:grid-cols-[1fr_auto] sm:items-center"
+              >
+                <div className="min-w-0">
+                  <div className="font-medium text-white truncate">{p.title}</div>
+                  <div className="text-gray-500 text-xs truncate">{p.github_repo}</div>
+                </div>
+                <div className="flex flex-wrap gap-3 items-center sm:justify-end">
+                  <label className="flex items-center gap-1.5 cursor-pointer text-gray-200 text-xs">
+                    <input
+                      type="checkbox"
+                      checked={p.displayed_on_site}
+                      disabled={busyId === p.id}
+                      onChange={(e) =>
+                        updateRow(p.id, { displayed_on_site: e.target.checked })
+                      }
+                    />
+                    On site
+                  </label>
+                  <label className="flex items-center gap-1.5 cursor-pointer text-gray-200 text-xs">
+                    <input
+                      type="checkbox"
+                      checked={p.is_highlight}
+                      disabled={busyId === p.id}
+                      onChange={(e) => updateRow(p.id, { is_highlight: e.target.checked })}
+                    />
+                    Featured
+                  </label>
+                  <label className="flex items-center gap-1.5 text-gray-200 text-xs">
+                    <span className="text-gray-400">Order</span>
+                    <input
+                      type="number"
+                      className="w-14 rounded bg-black/40 border border-white/20 px-1.5 py-1 text-white text-xs"
+                      defaultValue={p.highlight_sort}
+                      key={`${p.id}-${p.highlight_sort}`}
+                      disabled={busyId === p.id}
+                      onBlur={(e) => {
+                        const v = parseInt(e.target.value, 10);
+                        if (Number.isNaN(v) || v === p.highlight_sort) return;
+                        updateRow(p.id, { highlight_sort: v });
+                      }}
+                    />
+                  </label>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }

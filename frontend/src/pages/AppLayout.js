@@ -10,12 +10,12 @@ function AppLayout({ children }) {
   const toggleSidebar = () => setSidebarOpen(prev => !prev);
 
   return (
-    <div className="app-layout">
-        <VantaBackground />
+    <div className="app-layout min-h-screen min-h-[100dvh] flex flex-col">
+      <VantaBackground />
       <Header title="Isaac's Portfolio" toggleSidebar={toggleSidebar} />
-      <div className="layout-body">
+      <div className="layout-body flex flex-1 min-h-0 min-w-0 w-full relative">
         <SiteSidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-        <main className="main-content">{children}</main>
+        <main className="main-content flex flex-1 min-h-0 min-w-0 flex-col">{children}</main>
       </div>
       <Footer />
     </div>
