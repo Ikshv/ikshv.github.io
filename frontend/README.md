@@ -13,6 +13,8 @@ Never put the **service_role** key in the frontend.
 
 **Portfolio projects:** In the Supabase **SQL Editor** for the **same project** as your `REACT_APP_SUPABASE_URL`, open `supabase/migrations/20260325120000_portfolio_projects.sql` from this repo, paste the full file, and **Run**. That creates `public.portfolio_projects` and sends `NOTIFY pgrst, 'reload schema'` so the API sees the table. If you still see “schema cache”, run `NOTIFY pgrst, 'reload schema';` once manually. Then set `REACT_APP_GITHUB_USER` if needed, sign in, and use **Dashboard → Sync from GitHub** to import **all** your GitHub repos (optional root `project.json` enriches fields). New imports are hidden until you enable **On site**; use **Featured** for the home row. Optional sample rows: `supabase/optional_seed_portfolio_projects.sql` (run manually only if you want them).
 
+**Employment (About / Experience):** Run `supabase/migrations/20260325200000_employment_positions.sql`, then optionally `supabase/optional_seed_employment_positions.sql`. The About page **Experience** section reads `employment_positions`; the **Dashboard** shows a table with detail/JSON and **On site** / **sort** toggles.
+
 **Production:** Set the same two variables in Vercel (or your host) and as GitHub Actions secrets `REACT_APP_SUPABASE_URL` and `REACT_APP_SUPABASE_ANON_KEY` so the GitHub Pages deploy workflow can build with auth enabled.
 
 ## Available Scripts

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import DashboardProjectAdmin from '../components/DashboardProjectAdmin';
+import DashboardEmploymentTable from '../components/DashboardEmploymentTable';
 
 const Dashboard = () => {
   const { user, logout } = useContext(AuthContext);
@@ -36,6 +37,8 @@ const Dashboard = () => {
         )}
 
         <DashboardProjectAdmin />
+
+        <DashboardEmploymentTable />
 
         <div className="flex flex-wrap gap-3 mt-8">
           <Link

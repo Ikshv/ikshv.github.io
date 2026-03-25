@@ -1,70 +1,44 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import ExperienceCard from '../components/ExperienceCard';
 import { motion } from 'framer-motion';
-
-const experiences = [
-  {
-    id: 1,
-    jobTitle: "Software Engineer",
-    companyName: "Bokam Engineering",
-    startDate: "Jan 2022",
-    endDate: "Jan 2023",
-    description: "Developed internal applications to streamline calibration workflows and data acquisition pipelines.",
-    projects: [
-      {
-        name: "Calibration Systems",
-        summary: "Created a React-based app for calibrating JOY mining equipment, replacing paper-based workflows.",
-        technologies: ["React", "JavaScript", "CSS"],
-        highlights: [
-          "Enabled 1000+ devices to be calibrated digitally.",
-          "Cut processing time by 60%."
-        ]
-      },
-      {
-        name: "Data Pipelines",
-        summary: "Automated telemetry and diagnostic stream processing for vehicular input systems.",
-        technologies: ["Python", "Pandas", "NumPy"],
-        highlights: [
-          "Improved error detection during testing.",
-          "Interfaced with hardware data streams over CAN."
-        ]
-      }
-    ]
-  },
-  {
-    id: 2,
-    jobTitle: "Data Analyst",
-    companyName: "Gatekeeper Systems",
-    startDate: "Jul 2022",
-    endDate: "Apr 2023",
-    description: "Owned Looker dashboards and backend analytics for subscription services and theft analytics.",
-    projects: [
-      {
-        name: "Subscription Reporting System",
-        summary: "Managed reporting pipelines for 2000+ retail locations.",
-        technologies: ["SQL", "Looker", "Python"],
-        highlights: [
-          "Automated alerts for expiring subscriptions.",
-          "Reduced reporting lag by 75%."
-        ]
-      },
-      {
-        name: "Theft & System Analytics",
-        summary: "Created executive dashboards for pushout theft data and device telemetry.",
-        technologies: ["Looker", "Jira", "Python"],
-        highlights: [
-          "Helped prioritize engineering fixes with data-driven insights.",
-          "Detected 3k+ anomalies from telemetry logs."
-        ]
-      }
-    ]
-  }
-];
+import { useEmploymentPositions } from '../hooks/useEmploymentPositions';
 
 function Experiences() {
+  const { rows, loading, error } = useEmploymentPositions({ includeDrafts: false });
+
+  const experiences = useMemo(
+    () =>
+      rows.map((row) => ({
+        id: row.id,
+        jobTitle: row.job_title,
+        companyName: row.company_name,
+        startDate: row.start_date,
+        endDate: row.end_date ?? '',
+        description: row.description,
+        projects: Array.isArray(row.projects) ? row.projects : [],
+      })),
+    [rows]
+  );
+
   return (
     <section id="experience" className="max-w-5xl mx-auto px-6 py-2 text-white">
       <h2 className="text-4xl font-bold mb-10 text-center">Experience</h2>
+
+      {loading && (
+        <p className="text-center text-gray-400">Loading experience…</p>
+      )}
+      {!loading && error && (
+        <p className="text-center text-red-300 text-sm max-w-lg mx-auto">
+          Could not load experience ({error}). Add the{' '}
+          <code className="text-gray-200">employment_positions</code> table in Supabase and optional
+          seed, then refresh.
+        </p>
+      )}
+      {!loading && !error && experiences.length === 0 && (
+        <p className="text-center text-gray-400">
+          No experience entries yet. Add rows in Supabase or run the optional seed SQL.
+        </p>
+      )}
 
       <div className="space-y-8">
         {experiences.map((exp, i) => (
