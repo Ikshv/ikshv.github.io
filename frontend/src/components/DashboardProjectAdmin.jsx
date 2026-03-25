@@ -77,8 +77,9 @@ function DashboardProjectAdmin() {
         <p className="text-gray-400 text-sm">Loading projects…</p>
       ) : rows.length === 0 ? (
         <p className="text-gray-400 text-sm">
-          No rows yet. Run the SQL migration in Supabase, optionally seed data, then use{' '}
-          <strong>Sync from GitHub</strong>.
+          No rows yet. Run the portfolio table migration in Supabase (empty table), configure GitHub
+          username if needed, then use <strong>Sync from GitHub</strong> for a repo with{' '}
+          <code className="text-gray-300">project.json</code>.
         </p>
       ) : (
         <ul className="space-y-3 text-sm">

@@ -1,5 +1,7 @@
 -- Portfolio projects: single source for /projects, home highlights, and GitHub sync.
--- Run in Supabase SQL Editor or via `supabase db push` if you use the CLI.
+-- Run this file only in Supabase SQL Editor (or `supabase db push`) to create an empty table.
+-- Do not seed here: use Dashboard → Sync from GitHub, Table Editor, or optional
+-- `supabase/optional_seed_portfolio_projects.sql` when you want sample rows.
 
 create table if not exists public.portfolio_projects (
   id uuid primary key default gen_random_uuid(),

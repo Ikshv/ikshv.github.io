@@ -1,4 +1,7 @@
--- Optional seed from legacy projectData.json (skip if you rely on GitHub sync only).
+-- OPTIONAL: do not run until you want sample rows. Not part of migrations.
+-- After `portfolio_projects` exists, you can paste this in the SQL Editor,
+-- or skip entirely and use Dashboard → Sync from GitHub + toggles for a test repo.
+
 insert into public.portfolio_projects (
   github_repo, slug, title, description, tags, homepage, github_url,
   displayed_on_site, is_highlight, highlight_sort, published_at
