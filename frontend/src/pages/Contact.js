@@ -14,13 +14,13 @@ function Contact() {
 
       <div className="grid sm:grid-cols-3 gap-6">
         <a
-          href="mailto:ikshv.dev@gmail.com"
+          href="mailto:ikshvartsman@gmail.com"
           target="_blank"
           rel="noopener noreferrer"
           className="flex flex-col items-center bg-white/10 backdrop-blur-lg border border-white/20 rounded-lg p-5 hover:bg-white/20 transition"
         >
           <FaEnvelope className="text-3xl mb-2 text-blue-300" />
-          <span className="text-sm">ikshv.dev@gmail.com</span>
+          <span className="text-sm">ikshvartsman@gmail.com</span>
         </a>
 
         <a
