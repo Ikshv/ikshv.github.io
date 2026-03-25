@@ -15,7 +15,9 @@ function Experiences() {
         startDate: row.start_date,
         endDate: row.end_date ?? '',
         description: row.description,
-        projects: Array.isArray(row.projects) ? row.projects : [],
+        projects: (Array.isArray(row.projects) ? row.projects : []).filter(
+          (p) => p.show_on_site !== false
+        ),
       })),
     [rows]
   );
